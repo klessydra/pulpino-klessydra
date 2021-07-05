@@ -85,6 +85,7 @@ else:
 
     import ipstools
 
+remote="https://github.com/pulp-platform/" #temporary solution for now
 # creates an IPApproX database
 ipdb = ipstools.IPDatabase(ips_dir="./ips", skip_scripts=True)
 # updates the IPs from the git repo
