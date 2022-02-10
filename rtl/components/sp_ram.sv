@@ -1,10 +1,10 @@
 // Copyright 2017 ETH Zurich and University of Bologna.
 // Copyright and related rights are licensed under the Solderpad Hardware
-// License, Version 0.51 (the “License”); you may not use this file except in
+// License, Version 0.51 (the âLicenseâ); you may not use this file except in
 // compliance with the License.  You may obtain a copy of the License at
 // http://solderpad.org/licenses/SHL-0.51. Unless required by applicable law
 // or agreed to in writing, software, hardware and materials distributed under
-// this License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR
+// this License is distributed on an âAS ISâ BASIS, WITHOUT WARRANTIES OR
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
@@ -26,15 +26,35 @@ module sp_ram
   );
 
   localparam words = NUM_WORDS/(DATA_WIDTH/8);
-
+	
+	
   logic [DATA_WIDTH/8-1:0][7:0] mem[words];
   logic [DATA_WIDTH/8-1:0][7:0] wdata;
   logic [ADDR_WIDTH-1-$clog2(DATA_WIDTH/8):0] addr;
 
+  
   integer i;
+  
+  /*-------------------------------------------*/
+	
+	localparam size_subber = 2+ADDR_WIDTH-1-$clog2(DATA_WIDTH/8)+1; // corretto, deve essere dinamicamente esteso tanto quanto
+	//la width del segnale "addr_i", che di per se è già un bit in meno rispetto allo spazio di indirizzamento necessario
+	//per puntare all'ultima locazione della memoria globale
+	logic [(size_subber-1):0] subber; // corretto
+	assign subber = 1048576;	//corretto, valore da mettere in decimale
 
+	logic [(size_subber-1):0] intercept;
+	assign intercept = addr_i - subber;
 
-  assign addr = addr_i[ADDR_WIDTH-1:$clog2(DATA_WIDTH/8)];
+	logic [ADDR_WIDTH-1-$clog2(DATA_WIDTH/8):0] addr_mask; //stessa dimensione di addr, che non si prende i due ultimi bit
+	assign addr_mask = addr_i[ADDR_WIDTH-1:$clog2(DATA_WIDTH/8)]-intercept[(size_subber-1):0];//lo posso pure cancellare
+	
+	/*	
+	logic [ADDR_WIDTH-1-$clog2(DATA_WIDTH/8):0] test_copy; //stessa dimensione di addr, che non si prende i due ultimi bit
+	*/
+	/*-------------------------------------------*/
+	
+  assign addr = intercept[ADDR_WIDTH-1:$clog2(DATA_WIDTH/8)]; // per scartare i 2 lsb
 
 
   always @(posedge clk)
