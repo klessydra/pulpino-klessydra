@@ -49,7 +49,7 @@ if(len(sys.argv) < 2):
 
 
 rom_size      = 548 # in words (32 bit)
-rom_start     = 0x00008000
+rom_start     = 0x00020000
 rom_end       = rom_start + rom_size * 4 - 1
 
 
