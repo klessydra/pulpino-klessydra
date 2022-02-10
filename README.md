@@ -1,6 +1,8 @@
 <img src="https://raw.githubusercontent.com/pulp-platform/pulpino/master/doc/datasheet/figures/pulpino_logo_inline1.png" width="400px" />
 
-<img style="float: right;" src="/pics/Klessydra_Logo.png" width="400">
+<p align="right">
+	<img style="float: right;" src="/pics/Klessydra_Logo.png" width="400">
+</p>
 
 # Introduction
 
