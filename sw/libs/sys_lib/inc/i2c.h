@@ -30,6 +30,7 @@
 #define I2C_STOP_READ   0x60
 #define I2C_START_WRITE 0x90
 #define I2C_STOP_WRITE  0x50
+#define I2C_STOP_READ_NACK 0x68
 
 #define I2C_CTR_EN        0x80 // enable only
 #define I2C_CTR_INTEN     0x40 // interrupt enable only
