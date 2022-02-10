@@ -24,8 +24,8 @@ enable_testing()
 
 set(RISCV 1)
 
-if(${RISCY_RV32F} AND ${USE_ZERO_RISCY})
-  message(SEND_ERROR "Floating Point Extensions are not supported on zero-riscy")
+if(${RISCY_RV32F} AND (${USE_ZERO_RISCY} OR ${USE_KLESSYDRA}))
+  message(SEND_ERROR "Floating Point Extensions are not supported on the selected core")
 endif()
 
 # assign default architecture flags if not defined
@@ -34,7 +34,9 @@ string(COMPARE EQUAL "${GCC_MARCH}" "" GCC_MARCH_NOT_SET)
 if(GCC_MARCH_NOT_SET)
    message("\nUsing default architecture flags!!\n")
 
-   if(${USE_RISCY})
+   if(${USE_KLESSYDRA_TEST})
+     set(GCC_MARCH "rv32ima")
+   elseif(${USE_RISCY})
       if(${RISCY_RV32F})
          set(GCC_MARCH "IMFDXpulpv2")
       else()
@@ -51,8 +53,9 @@ endif()
 
 
 message(STATUS "GCC_MARCH= ${GCC_MARCH}")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -march=${GCC_MARCH} -Wa,-march=${GCC_MARCH}")
-set(CMAKE_OBJDUMP_FLAGS -Mmarch=${GCC_MARCH} -d)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=${GCC_MARCH} -Wa,-march=${GCC_MARCH}")
+set(CMAKE_OBJDUMP_FLAGS -Mmarch=${GCC_MARCH} -Sd)
 
 if(${GCC_MARCH} MATCHES "IMFDXpulpv2")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mhard-float")
@@ -82,7 +85,16 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${CMAKE_CURRENT_SOURCE_D
 set(BOOT_LINKER_FLAGS      "-L${CMAKE_CURRENT_SOURCE_DIR}/ref -T${LDSCRIPT_BOOT} -nostartfiles -Wl,--gc-sections")
 
 set(CMAKE_CXX_COMPILER "${CMAKE_C_COMPILER}")
-set(CMAKE_CXX_FLAGS    "${CMAKE_C_FLAGS}")
+
+if (${USE_KLESSYDRA_TEST})
+  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-sized-deallocation")
+else()
+  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
+endif()
+
+set(COREMARK_DEFS "${ITERATIONS}")
+set(KLESS_DEFINES "${TPS}" "${NUMOFELEMENTS}" "${TIME}" "${A_ORDER}" "${B_ORDER}" "${KLESS_SPM_A}" "${KLESS_SPM_B}" "${KLESS_SPM_C}" "${KLESS_SPM_D}" "-DUSE_KLESSYDRA_M=${USE_KLESSYDRA_M}") 
+        # For USE_KLESSYDRA_M, the prefix (-DUSE_KLESSYDRA_M) is inserted here instead of the bash script, because this variable is also passed to the RTL and not only passed in software
 
 set(CMAKE_ASM_COMPILER "${CMAKE_C_COMPILER}")
 set(CMAKE_ASM_FLAGS    "${CMAKE_C_FLAGS}")
@@ -95,16 +107,29 @@ set(VSIM "vsim" CACHE FILEPATH "Path to the vsim executable")
  if(${ZERO_RV32E})
    set(crt0      "ref/crt0.riscv_E.S")
    set(crt0_boot "ref/crt0.boot_E.S")
+ elseif(${KLESS_RV32E})
+   set(crt0      "ref/crt0.klessydra_E.S")
+   set(crt0_boot "ref/crt0.boot_E.S")
+ elseif(${USE_KLESSYDRA})
+   set(crt0      "ref/crt0.klessydra.S")
+   set(crt0_boot "ref/crt0.boot.S")
  else()
    set(crt0      "ref/crt0.riscv.S")
    set(crt0_boot "ref/crt0.boot.S")
  endif()
 
+ include_directories(libs/klessydra_lib/general_libs/inc)
+ include_directories(libs/klessydra_lib/bench_libs/inc)
+ include_directories(libs/klessydra_lib/vgg_libs/inc)
+ if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
+   include_directories(libs/klessydra_lib/dsp_libs/inc) 
+ endif()
+   include_directories(libs/klessydra_lib/dsp_libs/inc) 
+   
  include_directories(libs/sys_lib/inc)
-
  if(${ARDUINO_LIB})
-  include_directories(libs/Arduino_lib/core_libs/inc)
-  include_directories(libs/Arduino_lib/separate_libs/inc)
+   include_directories(libs/Arduino_lib/core_libs/inc)
+   include_directories(libs/Arduino_lib/separate_libs/inc)
  endif()
 
  if(${RISCY_RV32F})
@@ -124,7 +149,7 @@ set(VSIM "vsim" CACHE FILEPATH "Path to the vsim executable")
 
 
 add_custom_target(vcompile
-  COMMAND tcsh -c "./vcompile/build_rtl_sim.csh"
+  COMMAND tcsh -c "./vcompile/build_rtl_sim.csh" #${kless_configs}"
   WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
   ${USES_TERMINAL})
 
@@ -143,15 +168,64 @@ add_custom_target(vcompile.core.riscy
   WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
   ${USES_TERMINAL})
 
+add_custom_target(vcompile.core.klessydra-t0-2th
+  COMMAND tcsh -c ./vcompile/vcompile_klessydra-t0-2th.csh
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
+add_custom_target(vcompile.core.klessydra-t0-3th
+  COMMAND tcsh -c ./vcompile/vcompile_klessydra-t0-3th.csh
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
+add_custom_target(vcompile.core.klessydra-t1-3th
+  COMMAND tcsh -c "./vcompile/vcompile_klessydra-t1-3th.csh" #${kless_configs}"
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
+add_custom_target(vcompile.core.klessydra-m
+  COMMAND tcsh -c "./vcompile/vcompile_klessydra-m.csh" #${kless_configs}"
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
+add_custom_target(vcompile.core.klessydra-s1
+  COMMAND tcsh -c "./vcompile/vcompile_klessydra-s1.csh" #${kless_configs}"
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
+add_custom_target(vcompile.core.klessydra-OoO
+  COMMAND tcsh -c "./vcompile/vcompile_klessydra-OoO.csh" #${kless_configs}"
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
+add_custom_target(vcompile.core.klessydra-f0-3th
+  COMMAND tcsh -c ./vcompile/vcompile_klessydra-f0-3th.csh
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
 add_custom_target(vcompile.core.zero
   COMMAND tcsh ./vcompile/vcompile_zero-riscy.csh
   WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
   ${USES_TERMINAL})
 
+add_custom_target(vcompile.core.netlist
+  COMMAND tcsh -c "./vcompile/vcompile_netlist.csh" #${kless_configs}"
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
 ################################################################################
 
+add_subdirectory(libs/klessydra_lib/general_libs)
+add_subdirectory(libs/klessydra_lib/bench_libs)
+add_subdirectory(libs/klessydra_lib/vgg_libs)
+
+if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
+  add_subdirectory(libs/klessydra_lib/dsp_libs)
+endif()
+  
 add_subdirectory(libs/string_lib)
 add_subdirectory(libs/sys_lib)
+add_subdirectory(libs/bench_lib)
 
 if(${RISCY_RV32F})
  add_subdirectory(libs/math_fns_lib)
@@ -161,7 +235,8 @@ if(${ARDUINO_LIB})
  add_subdirectory(libs/Arduino_lib)
 endif()
 
-add_subdirectory(libs/bench_lib)
+
+
 
 set(BEEBS_LIB 0)
 

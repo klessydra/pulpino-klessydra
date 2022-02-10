@@ -37,7 +37,9 @@ macro(add_application NAME SOURCE_FILES)
         ${CMAKE_SOURCE_DIR}/libs/beebs_lib/inc
       )
   endif()
+  
 
+  add_definitions(${KLESS_DEFINES} ${COREMARK_DEFS})
   add_executable(${NAME}.elf $<TARGET_OBJECTS:crt0> ${SOURCE_FILES})
 
   # set subdirectory for add_executable
@@ -73,7 +75,15 @@ macro(add_application NAME SOURCE_FILES)
   endif()
 
   # link libraries
-  target_link_libraries(${NAME}.elf ${ARG_LIBS} ${ARDUINO_SEP} ${ARDUINO_CORE} ${BEEBS_LIB_NAME} bench ${MATH_FNS_LIB} string sys m)
+  if(${USE_KLESSYDRA_TEST})
+    if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
+      target_link_libraries(${NAME}.elf ${ARG_LIBS} ${ARDUINO_SEP} ${ARDUINO_CORE} ${BEEBS_LIB_NAME} kless_dsp_libs kless_libs bench ${MATH_FNS_LIB} string sys m)
+    else()
+      target_link_libraries(${NAME}.elf ${ARG_LIBS} ${ARDUINO_SEP} ${ARDUINO_CORE} ${BEEBS_LIB_NAME} kless_libs bench ${MATH_FNS_LIB} string sys m)
+    endif()
+  else()
+    target_link_libraries(${NAME}.elf ${ARG_LIBS} ${ARDUINO_SEP} ${ARDUINO_CORE} ${BEEBS_LIB_NAME} bench ${MATH_FNS_LIB} string sys m)
+  endif()
 
   # this specifies the testbench to use for simulation
   if(ARG_TB)
@@ -93,6 +103,7 @@ macro(add_application NAME SOURCE_FILES)
   add_custom_command(TARGET ${NAME}.read
     POST_BUILD
     COMMAND ${CMAKE_OBJDUMP} ${CMAKE_OBJDUMP_FLAGS} $<TARGET_FILE:${NAME}.elf> > ${NAME}.read
+    COMMAND cp ${NAME}.read ${CMAKE_BINARY_DIR}/test.dump
     WORKING_DIRECTORY ./${SUBDIR}
     DEPENDS ${NAME}.elf)
 
@@ -218,6 +229,7 @@ if(${RISCV})
 endif()
 add_subdirectory(sequential_tests)
 add_subdirectory(imperio_tests)
+add_subdirectory(klessydra_tests)
 
 if(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/scratch/")
   add_subdirectory(scratch)
