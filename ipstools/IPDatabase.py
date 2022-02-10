@@ -14,6 +14,7 @@
 import sys,os,stat
 sys.path.append(os.path.abspath("yaml/lib64/python"))
 import yaml
+import re
 try:
     from collections import OrderedDict
 except ImportError:
@@ -207,37 +208,60 @@ class IPDatabase(object):
                 os.chdir("./%s" % ip['path'])
 
                 # now check if the directory is a git directory
-                if not os.path.isdir(".git"):
-                    print(tcolors.ERROR + "ERROR: Found a normal directory instead of a git directory at %s. You may have to delete this folder to make this script work again" % os.getcwd() + tcolors.ENDC)
-                    errors.append("%s - %s: Not a git directory" % (ip['name'], ip['path']));
-                    continue
-
-                print(tcolors.OK + "\nUpdating ip '%s'..." % ip['name'] + tcolors.ENDC)
-
-                # fetch everything first so that all commits are available later
-                ret = execute("%s fetch" % (git))
-                if ret != 0:
-                    print(tcolors.ERROR + "ERROR: could not fetch ip '%s'." % (ip['name']) + tcolors.ENDC)
-                    errors.append("%s - Could not fetch" % (ip['name']));
-                    continue
-
-                # make sure we have the correct branch/tag for the pull
-                ret = execute("%s checkout %s" % (git, ip['commit']))
-                if ret != 0:
-                    print(tcolors.ERROR + "ERROR: could not checkout ip '%s' at %s." % (ip['name'], ip['commit']) + tcolors.ENDC)
-                    errors.append("%s - Could not checkout commit %s" % (ip['name'], ip['commit']));
-                    continue
-
-                # check if we are in detached HEAD mode
-                stdout = execute_out("%s status" % git)
-
-                if not ("HEAD detached" in stdout):
-                    # only do the pull if we are not in detached head mode
-                    ret = execute("%s pull --ff-only" % git)
-                    if ret != 0:
-                        print(tcolors.ERROR + "ERROR: could not update ip '%s'" % ip['name'] + tcolors.ENDC)
-                        errors.append("%s - Could not update" % (ip['name']));
+                if ip['path'] != "apb/apb_node" and \
+                   ip['path'] != "apb/apb_event_unit" and \
+                   ip['path'] != "apb/apb_fll_if" and \
+                   ip['path'] != "apb/apb_gpio" and \
+                   ip['path'] != "apb/apb_i2c" and \
+                   ip['path'] != "apb/apb_pulpino" and \
+                   ip['path'] != "apb/apb_spi_master" and \
+                   ip['path'] != "apb/apb_timer" and \
+                   ip['path'] != "apb/apb_timer" and \
+                   ip['path'] != "apb/apb_uart" and \
+                   ip['path'] != "apb/apb_uart_sv" and \
+                   ip['path'] != "apb/apb2per" and \
+                   ip['path'] != "axi/axi2apb" and \
+                   ip['path'] != "axi/axi_mem_if_DP" and \
+                   ip['path'] != "axi/axi_node" and \
+                   ip['path'] != "axi/axi_slice" and \
+                   ip['path'] != "axi/axi_slice_dc" and \
+                   ip['path'] != "axi/axi_spi_master" and \
+                   ip['path'] != "axi/axi_spi_slave" and \
+                   ip['path'] != "axi/core2axi" and \
+                   ip['path'] != "adv_dbg_if" and \
+                   ip['path'] != "fpu" and \
+                   ip['path'] != "riscv" and \
+                   ip['path'] != "zero-riscy":
+                    if not os.path.isdir(".git"):
+                        print(tcolors.ERROR + "ERROR: Found a normal directory instead of a git directory at %s. You may have to delete this folder to make this script work again" % os.getcwd() + tcolors.ENDC)
+                        errors.append("%s - %s: Not a git directory" % (ip['name'], ip['path']));
                         continue
+
+                    print(tcolors.OK + "\nUpdating ip '%s'..." % ip['name'] + tcolors.ENDC)
+
+                    # fetch everything first so that all commits are available later
+                    ret = execute("%s fetch" % (git))
+                    if ret != 0:
+                        print(tcolors.ERROR + "ERROR: could not fetch ip '%s'." % (ip['name']) + tcolors.ENDC)
+                        errors.append("%s - Could not fetch" % (ip['name']));
+                        continue
+
+                    ret = execute("%s checkout %s" % (git, ip['commit']))
+                    if ret != 0:
+                        print(tcolors.ERROR + "ERROR: could not checkout ip '%s' at %s." % (ip['name'], ip['commit']) + tcolors.ENDC)
+                        errors.append("%s - Could not checkout commit %s" % (ip['name'], ip['commit']));
+                        continue
+
+                    # check if we are in detached HEAD mode
+                    stdout = execute_out("%s status" % git)
+
+                    if not ("HEAD detached" in stdout):
+                        # only do the pull if we are not in detached head mode
+                        ret = execute("%s pull --ff-only" % git)
+                        if ret != 0:
+                            print(tcolors.ERROR + "ERROR: could not update ip '%s'" % ip['name'] + tcolors.ENDC)
+                            errors.append("%s - Could not update" % (ip['name']));
+                            continue
 
             # Not yet cloned, so we have to do that first
             else:

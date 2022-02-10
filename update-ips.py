@@ -85,11 +85,14 @@ else:
 
     import ipstools
 
-remote="https://github.com/pulp-platform/" #temporary solution for now
+kless_remote = remote
+pulp_remote ="https://github.com/pulp-platform/" #temporary solution for fetching from pulp-platform on github
+
 # creates an IPApproX database
 ipdb = ipstools.IPDatabase(ips_dir="./ips", skip_scripts=True)
 # updates the IPs from the git repo
-ipdb.update_ips(remote = remote)
+ipdb.update_ips(remote = kless_remote)
+#ipdb.update_ips(remote = pulp_remote)
 
 # launch generate-ips.py
 execute("./generate-scripts.py")

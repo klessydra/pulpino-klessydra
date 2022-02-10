@@ -72,3 +72,12 @@ zero-riscy:
 
 fpu:
   commit: pulpinov1
+
+##########################
+# Klessydra specific IPs #
+##########################
+
+# Klessydra-Morph
+Morph:
+  commit: rtl_only
+#  commit: hdl-only
