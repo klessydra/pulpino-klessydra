@@ -35,7 +35,7 @@ then
 	#  -------------------------------------------------------------------------------------------------------------------------------------------
 
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	KLESS_CONTEXT_SWITCH=1          # Enables the context switching between cores
+	KLESS_CONTEXT_SWITCH=0          # Enables the context switching between cores
 	KLESS_THREAD_POOL_SIZE=3        # Changing the TPS to less than "number of pipeline stages-1" is not allowed. And making it bigger than "pipeline stages-1" is okay but not recommended
 	KLESS_LUTRAM_RF=0 				# Changes the regfile from flip-flop type into BRAM type
 	KLESS_RV32E=0                   # Regfile size, Can be set to 32 for RV32E being 0 else 16 for RV32E being set to 1, also chnges the RISCV compiler and Klessydra startup file accordingly
