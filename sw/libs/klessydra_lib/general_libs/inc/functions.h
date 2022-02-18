@@ -14,8 +14,8 @@ int *ptr_key;
 int barrier_thread_registration_count;
 int arrived_at_barrier_count;  // Counter for the threads that arrived at the barrier
 
-#ifndef __KLESSYDRACFUNCTIONS_H__
-#define __KLESSYDRACFUNCTIONS_H__
+//#ifndef __KLESSYDRACFUNCTIONS_H__
+//#define __KLESSYDRACFUNCTIONS_H__
 
 int Klessydra_get_mhartid();
 
@@ -47,8 +47,8 @@ void Klessydra_WFI();	// Wait-for-interrupt function
 
 void Klessydra_En_Int();
 
-
-__attribute__ ((always_inline)) inline void Klessydra_perf_cnt_start() {
+__attribute__ ((always_inline)) inline void Klessydra_perf_cnt_start() 
+{
 
 	int enable_perf_cnt = 0;
 
@@ -67,6 +67,8 @@ __attribute__ ((always_inline)) inline void Klessydra_perf_cnt_start() {
 	);
 
 }
+
+//int* ptr_perf;
 
 __attribute__ ((always_inline)) inline int* Klessydra_perf_cnt_finish() {	
 
@@ -100,8 +102,9 @@ __attribute__ ((always_inline)) inline int* Klessydra_perf_cnt_finish() {
 		 [perf6] "r" (perf[6]),
 		 [perf7] "r" (perf[7]),
 		 [ptr_perf] "r" (ptr_perf)
+		:"memory"
 	);
 	return ptr_perf;
 }
 
-#endif
+//#endif
