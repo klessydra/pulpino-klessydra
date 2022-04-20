@@ -28,4 +28,7 @@ int printf(const char *format, ...);
 void * memset (void *dest, int val, size_t len);
 int putchar(int s);
 
+// Converts a floating-point/double number to a string.
+void ftoa(float n, char* res, int afterpoint);
+
 #endif
