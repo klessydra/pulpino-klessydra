@@ -551,7 +551,7 @@ module core_region
       );
 
   end else if (USE_KLESSYDRA_M) begin: CORE
-      klessydra_m_core
+      klessydra_top
       #(
         .THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
         .LUTRAM_RF               (KLESS_LUTRAM_RF),
