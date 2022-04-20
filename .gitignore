@@ -3,5 +3,5 @@ sw/build*
 imperio
 ips/T13x
 ips/Morph
-sw/apps/klessydra_tests/
-sw/libs/klessydra_lib/
+sw/apps/klessydra_tests/*
+sw/libs/klessydra_lib/*
