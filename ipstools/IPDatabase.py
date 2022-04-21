@@ -205,7 +205,7 @@ class IPDatabase(object):
 
         for ip in ips:
             if (ip['name'] == "Software-Test-Suite"):
-	            ip['path'] = "../sw/apps/klessydra-tests"
+	            ip['path'] = "../sw/apps/klessydra_tests"
             elif (ip['name'] == "Libraries"):
                 ip['path'] = "../sw/libs/klessydra_lib"
             os.chdir(cwd)
