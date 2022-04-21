@@ -81,3 +81,10 @@ fpu:
 Morph:
   commit: rtl_only
 #  commit: hdl-only
+
+# Klessydra Software Suite
+Software-Test-Suite:
+  commit: master
+# Klessydra Libraries
+Libraries:
+  commit: master
