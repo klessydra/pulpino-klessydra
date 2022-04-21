@@ -79,8 +79,7 @@ fpu:
 
 # Klessydra-Morph
 Morph:
-  commit: rtl_only
-#  commit: hdl-only
+  commit: master
 
 # Klessydra Software Suite
 Software-Test-Suite:
