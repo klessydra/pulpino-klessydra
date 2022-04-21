@@ -106,13 +106,15 @@ class IPDatabase(object):
 
     def import_yaml(self, ip_name, filename, ip_path, domain=None, alternatives=None):
         if not os.path.exists(os.path.dirname(filename)):
-            print(tcolors.ERROR + "ERROR: ip '%s' has not src_files.yml file. File path: %s" % (ip_name, filename) + tcolors.ENDC)
-            sys.exit(1)
+            if (ip_name != "Software-Test-Suite" and ip_name != "Libraries"):
+                print(tcolors.ERROR + "ERROR: ip '%s' does not have src_files.yml file. File path: %s" % (ip_name, filename) + tcolors.ENDC)
+                sys.exit(1)
         try:
             with open(filename, "rb") as f:
                 ip_dic = ordered_load(f, yaml.SafeLoader)
         except IOError:
-            print(tcolors.WARNING + "WARNING: Skipped ip '%s' as it has no src_files.yml file." % ip_name + tcolors.ENDC)
+            if (ip_name != "Software-Test-Suite" and ip_name != "Libraries"):
+                print(tcolors.WARNING + "WARNING: Skipped ip '%s' as it has no src_files.yml file." % ip_name + tcolors.ENDC)
             return
 
         try:
@@ -202,6 +204,10 @@ class IPDatabase(object):
         [server, group] = remote.rsplit(":", 1)
 
         for ip in ips:
+            if (ip['name'] == "Software-Test-Suite"):
+	            ip['path'] = "../sw/apps/klessydra_tests"
+            elif (ip['name'] == "Libraries"):
+                ip['path'] = "../sw/libs/klessydra_lib"
             os.chdir(cwd)
             # check if directory already exists, this hints to the fact that we probably already cloned it
             if os.path.isdir("./%s" % ip['path']):
@@ -278,9 +284,10 @@ class IPDatabase(object):
 
                 ret = execute("%s clone %s/%s.git %s" % (git, ip['remote'], ip['name'], ip['path']))
                 if ret != 0:
-                    print(tcolors.ERROR + "ERROR: could not clone, you probably have to remove the '%s' directory." % ip['name'] + tcolors.ENDC)
-                    errors.append("%s - Could not clone" % (ip['name']));
-                    continue
+                    if (ip['name'] != "Software-Test-Suite" and ip['name'] != "Libraries"):
+                        print(tcolors.ERROR + "ERROR: could not clone, you probably have to remove the '%s' directory." % ip['name'] + tcolors.ENDC)
+                        errors.append("%s - Could not clone" % (ip['name']));
+                        continue
                 os.chdir("./%s" % ip['path'])
                 ret = execute("%s checkout %s" % (git, ip['commit']))
                 if ret != 0:

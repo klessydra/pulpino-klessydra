@@ -79,7 +79,7 @@ VSIM_VLOG_INCDIR_CMD = "+incdir+"
 # generate struct that can be only checked after elaboration at vopt stage
 VSIM_VLOG_CMD = "vlog -quiet -sv -suppress 2583 -work ${LIB_PATH} %s %s %s || goto error\n"
 
-VSIM_VCOM_CMD = "vcom -quiet -suppress 2583 -work ${LIB_PATH} %s %s || goto error\n"
+VSIM_VCOM_CMD = "vcom -2008 -quiet -suppress 2583 -work ${LIB_PATH} %s %s || goto error\n"
 
 # templates for vsim.tcl
 VSIM_TCL_PREAMBLE = """set VSIM_IP_LIBS " \\\

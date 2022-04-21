@@ -25,7 +25,9 @@
 #define _INT_H_
 
 #ifndef __riscv__
+#ifndef __riscv
 #include "spr-defs.h"
+#endif
 #endif
 
 /* Number of interrupt handlers - really depends on PIC width in OR1200*/
@@ -41,7 +43,7 @@
  * interrupts are globally disable.
  */
 static inline void int_disable(void) {
-#ifdef __riscv__
+#if defined(__riscv__) || defined(__riscv)
   // read-modify-write
   int mstatus;
   asm volatile ("csrr %0, mstatus": "=r" (mstatus));
@@ -64,7 +66,7 @@ static inline void int_disable(void) {
  * interrupts are globally enabled.
  */
 static inline void int_enable(void) {
-#ifdef __riscv__
+#if defined(__riscv__) || defined(__riscv)
   // read-modify-write
   int mstatus;
   asm volatile ("csrr %0, mstatus": "=r" (mstatus));
