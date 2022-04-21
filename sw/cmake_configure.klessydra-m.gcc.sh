@@ -42,10 +42,10 @@ then
 	KLESS_RV32M=1                   # Enable the M-extension of the risc-v instruction set
 	KLESS_superscalar_exec_en=1		# Enables superscalar execution when set to 1, else the stall of the pipeline will depend on tha latency of the instruction
 	KLESS_morph_en=1                # Enables hardware metamorphisis, that lets the IMT processor morph into an in-order execution processor to avoid stalling
-    KLESS_fetch_stage_en=0          # Enables the an additional fetch stage which handles some of the data dependency logic (needs morph_en to be set or THREAD_POOL_SIZE < THREAD_POOL_BASELINE)
-    KLESS_branch_predict_en=1       # Enables a 1-bit branch predictor (if set without btb_en), that predicts a taken branch if the offset is negative, else it preicts a positive offset
-    KLESS_btb_en=0                  # Enables the branch target buffer of size defined in 2^btb_len, to enable the btb, branch_predict_en must be set to '1'
-    KLESS_btb_len=6                 # Sets the BTB size which is 2^btb_len
+	KLESS_fetch_stage_en=0          # Enables the an additional fetch stage which handles some of the data dependency logic (needs morph_en to be set or THREAD_POOL_SIZE < THREAD_POOL_BASELINE)
+	KLESS_branch_predict_en=1       # Enables a 1-bit branch predictor (if set without btb_en), that predicts a taken branch if the offset is negative, else it preicts a positive offset
+	KLESS_btb_en=0                  # Enables the branch target buffer of size defined in 2^btb_len, to enable the btb, branch_predict_en must be set to '1'
+	KLESS_btb_len=6                 # Sets the BTB size which is 2^btb_len
 	KLESS_accl_en=1                 # Enable the generation of the special purpose accelerator
 	KLESS_replicate_accl_en=1       # Set to 1 to replicate the accelerator for every thread
 	KLESS_multithreaded_accl_en=1   # Set to 1 to let the replicated accelerator share the functional units (note: replicate_accl_en must be set to '1')
@@ -56,7 +56,7 @@ then
 	KLESS_MCYCLE_EN=1               # Can be set to 1 or 0 only. Setting to zero will disable MCYCLE and MCYCLEH
 	KLESS_MINSTRET_EN=1             # Can be set to 1 or 0 only. Setting to zero will disable MINSTRET and MINSTRETH
 	KLESS_MHPMCOUNTER_EN=1          # Can be set to 1 or 0 only. Setting to zero will disable all performance counters except "MCYCLE/H" and "MINSTRET/H"
-	KLESS_count_all=1               # Perfomance counters count for all the harts instead of there own hart
+	KLESS_count_all=0               # Perfomance counters count for all the harts instead of there own hart
 	KLESS_debug_en=1                # Generates the debug unit
 	KLESS_tracer_en=1				# Generate the instruction tracer used only for debugging purposes
     #  -------------------------------------------------------------------------------------------------------------------------------------------------------
