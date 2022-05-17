@@ -2,6 +2,27 @@
 
 #export PATH=/compilerpath/:${PATH}
 
+#Configuration with M-F-D parameters:
+if (($#!=3))
+then
+	M=1;	F=1;	D=2;
+else
+	M=$1;	F=$2;	D=$3;
+fi
+echo -e "\e[94mConfiguration:\nM: \e[39m$M,\e[94mF: \e[39m$F, \e[94mD: \e[39m$D"
+if (($F==1))
+then
+	shared=1
+else
+	shared=0
+fi
+
+if (($M==3))
+then
+	m_enabled=1
+else
+	m_enabled=0
+fi
 
 if [ ! "$automate_en" ]
 then
@@ -47,12 +68,12 @@ then
 	KLESS_btb_en=0                  # Enables the branch target buffer of size defined in 2^btb_len, to enable the btb, branch_predict_en must be set to '1'
 	KLESS_btb_len=6                 # Sets the BTB size which is 2^btb_len
 	KLESS_accl_en=1                 # Enable the generation of the special purpose accelerator
-	KLESS_replicate_accl_en=1       # Set to 1 to replicate the accelerator for every thread
-	KLESS_multithreaded_accl_en=1   # Set to 1 to let the replicated accelerator share the functional units (note: replicate_accl_en must be set to '1')
+	KLESS_replicate_accl_en=$m_enabled       # Set to 1 to replicate the accelerator for every thread
+	KLESS_multithreaded_accl_en=$shared   # Set to 1 to let the replicated accelerator share the functional units (note: replicate_accl_en must be set to '1')
 	KLESS_SPM_NUM=4                 # The number of scratchpads available "Minimum allowed is two"
 	KLESS_Addr_Width=14             # This address is for scratchpads. Setting this will make the size of the spm to be: "2^Addr_Width -1"
 	#   KLESS_SPM_STRT_ADDR          std_logic_vector(31 downto 0) := x"1000_0000";  -- This is starting address of the spms, it shouldn't overlap any sections in the memory map
-	KLESS_SIMD=2                    # Changing the SIMD, would change the number of the functional units in the dsp, and the number of banks in the spms (can be power of 2 only e.g. 1,2,4,8)
+	KLESS_SIMD=$D                    # Changing the SIMD, would change the number of the functional units in the dsp, and the number of banks in the spms (can be power of 2 only e.g. 1,2,4,8)
 	KLESS_MCYCLE_EN=1               # Can be set to 1 or 0 only. Setting to zero will disable MCYCLE and MCYCLEH
 	KLESS_MINSTRET_EN=1             # Can be set to 1 or 0 only. Setting to zero will disable MINSTRET and MINSTRETH
 	KLESS_MHPMCOUNTER_EN=1          # Can be set to 1 or 0 only. Setting to zero will disable all performance counters except "MCYCLE/H" and "MINSTRET/H"
