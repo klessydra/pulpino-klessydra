@@ -123,6 +123,7 @@ set(VSIM "vsim" CACHE FILEPATH "Path to the vsim executable")
  include_directories(libs/klessydra_lib/vgg_libs/inc)
  if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
    include_directories(libs/klessydra_lib/dsp_libs/inc) 
+   include_directories(libs/klessydra_lib/cb_libs/inc) 
  endif()
    include_directories(libs/klessydra_lib/dsp_libs/inc) 
    
@@ -221,6 +222,7 @@ add_subdirectory(libs/klessydra_lib/vgg_libs)
 
 if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
   add_subdirectory(libs/klessydra_lib/dsp_libs)
+  add_subdirectory(libs/klessydra_lib/cb_libs)
 endif()
   
 add_subdirectory(libs/string_lib)
