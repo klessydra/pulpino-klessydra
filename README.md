@@ -5,6 +5,20 @@
 
 # Introduction
 
+This project is a merger of Pulpino with the Klessydra cores, and Software Suite as well as Klessydra Libraries
+
+# Klesydra Introduction
+
+Klessydra is a family of processing cores designed at the Digital System's Laboratory at the University of Sapienza in Rome. Klessydra features a whole class of different processing cores ranging from in-order execution to out-of-order execution cores, single threaded to multi-threaded, from non-fault tolerant to fault tolerant temporaly redundant or spatially redundant, and lastly from hardware static to hardware dynamic processor architectures.
+
+Klessydra features as well an integrated highly configurable pipelined Vector Coprocessing Unit (VCU) that can execute vector operations in SIMD / MIMD fashion exploiting both Data Level Parallelism (DLP) and Thread Level Parallelism (TLP). The VCU features a configurable set of Scratchpad Memories that are coupled with the Vector Engine, with a wide enough data bus to support the large bandwidth of the SIMD functional units. The VCU additionally features sub-word type parallelism in which small functional units capable of working on low percision data coallate together to form a larger functional unit.
+
+Klessydra is not only limited to hardware implementations, it features as well a wide class of software test suite and libraries to verify, benchmark, and evaluate the Klessydra processing cores. The integrated test environments range from Single threaded applications, to multi-threaded decoupled, lightly coupled, or tightly coupled multi-threaded applications. As well as accelerated applications that target the different configurations of the VCU. The tests suite includes a set of libraries that integrate important functions that can be used to design your own application to exploit the features of the Klessydra Cores.
+
+Klessydra started from a single cycle in-order execution core in the early days, and continues to grow till this day.
+
+# PULPino Introduction
+
 PULPino is an open-source single-core microcontroller system, based on 32-bit
 RISC-V cores developed at ETH Zurich. PULPino is configurable to use either 
 the RISCY or the zero-riscy core.
@@ -42,7 +56,6 @@ The PULPino platform is available for RTL simulation as well FPGA.
 PULPino has been taped-out as an ASIC in UMC 65nm in January 2016. It has full
 debug support on all targets. In addition we support extended profiling with
 source code annotated execution times through KCacheGrind in RTL simulations.
-
 
 ## Requirements
 
