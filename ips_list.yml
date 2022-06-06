@@ -77,13 +77,39 @@ fpu:
 # Klessydra specific IPs #
 ##########################
 
+
+# Klessydra-F03x
+F03x:
+  commit: rtl_only
+
 # Klessydra-Morph
 Morph:
   commit: master
 
+# Klessydra-OoO
+OoO:
+  commit: rtl_only
+
+# Klessydra-S1
+S1:
+  commit: rtl_only
+
+# Klessydra-T02x
+T02x:
+  commit: rtl_only
+
+# Klessydra-T03x
+T03x:
+  commit: rtl_only
+
+# Klessydra-T13x
+T13x:
+  commit: rtl_only
+
 # Klessydra Software Suite
 Software-Test-Suite:
   commit: master
+
 # Klessydra Libraries
 Libraries:
   commit: master
