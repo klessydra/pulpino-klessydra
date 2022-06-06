@@ -5,7 +5,7 @@
 
 # Introduction
 
-This project is a merger of Pulpino with the Klessydra cores, and Software Suite as well as Klessydra Libraries
+This project is a merger of Pulpino and Klessydra. It is an integration of the Klessydra Cores, and software test suite and libraries inside PULPino
 
 # Klesydra Introduction
 
