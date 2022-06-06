@@ -1,7 +1,12 @@
 *.swp
 sw/build*
 imperio
-ips/T13x
+ips/F03x
 ips/Morph
+ips/OoO
+ips/S1
+ips/T02x
+ips/T03x
+ips/T13x
 sw/apps/klessydra_tests*
 sw/libs/klessydra_lib*
