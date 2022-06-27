@@ -36,6 +36,7 @@ module tb;
   parameter  USE_KLESSYDRA_S1     = 0;
   parameter  USE_KLESSYDRA_OOO    = 0;
   parameter  USE_KLESSYDRA_F0_3TH = 0;
+  parameter  USE_KLESSYDRA_FT13   = 0;
   parameter	 USE_KLESSYDRA_T13X_NETLIST = 0;
   parameter  RISCY_RV32F    = 0;
   parameter  ZERO_RV32M     = 1;
@@ -154,14 +155,15 @@ module tb;
 
   pulpino_top
   #(
-    .USE_ZERO_RISCY          ( USE_ZERO_RISCY ),
+    .USE_ZERO_RISCY          ( USE_ZERO_RISCY       ),
     .USE_KLESSYDRA_T0_2TH    ( USE_KLESSYDRA_T0_2TH ),
     .USE_KLESSYDRA_T0_3TH    ( USE_KLESSYDRA_T0_3TH ),
     .USE_KLESSYDRA_T1_3TH    ( USE_KLESSYDRA_T1_3TH ),
-    .USE_KLESSYDRA_M         ( USE_KLESSYDRA_M ),
+    .USE_KLESSYDRA_M         ( USE_KLESSYDRA_M      ),
     .USE_KLESSYDRA_S1        ( USE_KLESSYDRA_S1     ),
     .USE_KLESSYDRA_OOO       ( USE_KLESSYDRA_OOO    ),
     .USE_KLESSYDRA_F0_3TH    ( USE_KLESSYDRA_F0_3TH ),
+    .USE_KLESSYDRA_FT13      ( USE_KLESSYDRA_FT13   ),
 	  .USE_KLESSYDRA_T13X_NETLIST ( USE_KLESSYDRA_T13X_NETLIST ),
     .RISCY_RV32F             ( RISCY_RV32F    ),
     .ZERO_RV32M              ( ZERO_RV32M     ),

@@ -203,6 +203,11 @@ add_custom_target(vcompile.core.klessydra-f0-3th
   WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
   ${USES_TERMINAL})
 
+add_custom_target(vcompile.core.klessydra-ft13
+  COMMAND tcsh -c ./vcompile/vcompile_klessydra-ft13.csh
+  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
+  ${USES_TERMINAL})
+
 add_custom_target(vcompile.core.zero
   COMMAND tcsh ./vcompile/vcompile_zero-riscy.csh
   WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
