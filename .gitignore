@@ -9,5 +9,6 @@ ips/T02x
 ips/T03x
 ips/T13x
 ips/fT13x
+ips/klessydra_netlists/netlists
 sw/apps/klessydra_tests*
 sw/libs/klessydra_lib*
