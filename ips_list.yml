@@ -106,6 +106,10 @@ T03x:
 T13x:
   commit: rtl_only
 
+# Klessydra-fT13x
+fT13x:
+  commit: master
+
 # Klessydra Software Suite
 Software-Test-Suite:
   commit: master
