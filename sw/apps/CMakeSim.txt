@@ -9,7 +9,7 @@ MESSAGE(STATUS "USE_KLESSYDRA_S1= ${USE_KLESSYDRA_S1}")
 MESSAGE(STATUS "USE_KLESSYDRA_OoO= ${USE_KLESSYDRA_OoO}")
 MESSAGE(STATUS "USE_KLESSYDRA_F0_3TH= ${USE_KLESSYDRA_F0_3TH}")
 MESSAGE(STATUS "USE_KLESSYDRA_FT13= ${USE_KLESSYDRA_FT3}")
-MESSAGE(STATUS "USE_KLESSYDRA_T13X_NETLIST= ${USE_KLESSYDRA_T13X_NETLIST}")
+MESSAGE(STATUS "USE_KLESSYDRA_NETLIST= ${USE_KLESSYDRA_NETLIST}")
 MESSAGE(STATUS "USE_ZERO_RISCY= ${USE_ZERO_RISCY}")
 MESSAGE(STATUS "RISCY_RV32F= ${RISCY_RV32F}")
 MESSAGE(STATUS "ZERO_RV32M= ${ZERO_RV32M}")
@@ -172,7 +172,7 @@ macro(add_sim_targets NAME)
   add_custom_target(${NAME}.vsimf
     COMMAND ${CMAKE_COMMAND} -E remove stdout/*
     COMMAND ${CMAKE_COMMAND} -E remove FS/*
-    COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; source tcl_files/klessydra_t13x_core_netlist.tcl\\; exit\\;' >vsim.log"
+    COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; source tcl_files/run_netlist.tcl\\; exit\\;' >vsim.log"
     COMMAND tail -n +1 -- ./stdout/*
     WORKING_DIRECTORY ./${SUBDIR}
     DEPENDS ${NAME}.slm.cmd ${NAME}.stim.txt ${NAME}.links

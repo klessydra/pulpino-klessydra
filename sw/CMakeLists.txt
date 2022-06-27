@@ -94,7 +94,7 @@ endif()
 
 set(COREMARK_DEFS "${ITERATIONS}")
 set(KLESS_DEFINES "${TPS}" "${NUMOFELEMENTS}" "${TIME}" "${A_ORDER}" "${B_ORDER}" "${KLESS_SPM_A}" "${KLESS_SPM_B}" "${KLESS_SPM_C}" "${KLESS_SPM_D}" "-DUSE_KLESSYDRA_M=${USE_KLESSYDRA_M}") 
-        # For USE_KLESSYDRA_M, the prefix (-DUSE_KLESSYDRA_M) is inserted here instead of the bash script, because this variable is also passed to the RTL and not only passed in software
+        # For USE_KLESSYDRA_M, the prefix (-DUSE_KLESSYDRA_M) is inserted here instead of the bash script, because this variable is also passed to the software suite and not only passed the RTL
 
 set(CMAKE_ASM_COMPILER "${CMAKE_C_COMPILER}")
 set(CMAKE_ASM_FLAGS    "${CMAKE_C_FLAGS}")
@@ -121,7 +121,7 @@ set(VSIM "vsim" CACHE FILEPATH "Path to the vsim executable")
  include_directories(libs/klessydra_lib/general_libs/inc)
  include_directories(libs/klessydra_lib/bench_libs/inc)
  include_directories(libs/klessydra_lib/vgg_libs/inc)
- if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
+ if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13})
    include_directories(libs/klessydra_lib/dsp_libs/inc) 
  endif()
    include_directories(libs/klessydra_lib/dsp_libs/inc) 
@@ -224,7 +224,7 @@ add_subdirectory(libs/klessydra_lib/general_libs)
 add_subdirectory(libs/klessydra_lib/bench_libs)
 add_subdirectory(libs/klessydra_lib/vgg_libs)
 
-if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
+if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13})
   add_subdirectory(libs/klessydra_lib/dsp_libs)
 endif()
   

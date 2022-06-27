@@ -24,7 +24,7 @@ then
 	USE_KLESSYDRA_OoO=0    # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1CV
 	USE_KLESSYDRA_F0_3TH=0 # if you are using klessydra-f0-3th (The four pipeline version of klessydra f0), set this to 1
 	USE_KLESSYDRA_FT13=0 # if you are using klessydra-fT13 (The temporally fault tolerant version of the T13), then set this to 1
-	USE_KLESSYDRA_T13X_NETLIST=0 # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1
+	USE_KLESSYDRA_NETLIST=0 # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1
 
 	#  -------------------------------------------------------------------------------------------------------------------------------------------
 	#  -- ██╗  ██╗██╗     ███████╗███████╗███████╗██╗   ██╗██████╗ ██████╗  █████╗      ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ ███████╗  --
@@ -247,7 +247,7 @@ cmake "$PULP_GIT_DIRECTORY"/sw/ \
     -DUSE_KLESSYDRA_OoO="$USE_KLESSYDRA_OoO" \
 	-DUSE_KLESSYDRA_F0_3TH="$USE_KLESSYDRA_F0_3TH" \
 	-DUSE_KLESSYDRA_FT13="$USE_KLESSYDRA_FT13" \
-	-DUSE_KLESSYDRA_T13X_NETLIST="$USE_KLESSYDRA_T13X_NETLIST" \
+	-DUSE_KLESSYDRA_NETLIST="$USE_KLESSYDRA_NETLIST" \
     -DUSE_ZERO_RISCY="$USE_ZERO_RISCY" \
     -DZERO_RV32M="$ZERO_RV32M" \
     -DZERO_RV32E="$ZERO_RV32E" \
