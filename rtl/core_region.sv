@@ -25,20 +25,20 @@ module core_region
     parameter DATA_RAM_SIZE        = 267386880,
     
     
-    parameter INSTR_RAM_SIZE       = 131072, // in bytes
-    parameter USE_KLESSYDRA_T0_2TH = 0,
-    parameter USE_KLESSYDRA_T0_3TH = 0,
-    parameter USE_KLESSYDRA_T1_3TH = 0,
-    parameter USE_KLESSYDRA_M      = 0,
-    parameter USE_KLESSYDRA_S1     = 0,
-    parameter USE_KLESSYDRA_OOO    = 0,
-    parameter USE_KLESSYDRA_F0_3TH = 0,
-    parameter USE_KLESSYDRA_FT13   = 0,
-    parameter USE_KLESSYDRA_T13X_NETLIST = 0,
-    parameter USE_ZERO_RISCY       = 0,
-    parameter RISCY_RV32F          = 0,
-    parameter ZERO_RV32M           = 1,
-    parameter ZERO_RV32E           = 0,
+    parameter INSTR_RAM_SIZE        = 131072, // in bytes
+    parameter USE_KLESSYDRA_T0_2TH  = 0,
+    parameter USE_KLESSYDRA_T0_3TH  = 0,
+    parameter USE_KLESSYDRA_T1_3TH  = 0,
+    parameter USE_KLESSYDRA_M       = 0,
+    parameter USE_KLESSYDRA_S1      = 0,
+    parameter USE_KLESSYDRA_OOO     = 0,
+    parameter USE_KLESSYDRA_F0_3TH  = 0,
+    parameter USE_KLESSYDRA_FT13    = 0,
+    parameter USE_KLESSYDRA_NETLIST = 0,
+    parameter USE_ZERO_RISCY        = 0,
+    parameter RISCY_RV32F           = 0,
+    parameter ZERO_RV32M            = 1,
+    parameter ZERO_RV32E            = 0,
 
 	//Klessydra Parameters
   parameter KLESS_CONTEXT_SWITCH         = 1,
@@ -300,8 +300,8 @@ module core_region
         .core_busy_o     ( core_busy_o       ),
         .ext_perf_counters_i (               )
       );
-    end else if (USE_KLESSYDRA_T13X_NETLIST) begin: CORE
-      klessydra_t1_3th_core_netlist
+    end else if (USE_KLESSYDRA_NETLIST) begin: CORE
+      klessydra_core_netlist
       #(
       )
 
@@ -1053,7 +1053,7 @@ module core_region
 
   instr_ram_wrap
   #(
-    .USE_KLESSYDRA_T13X_NETLIST ( USE_KLESSYDRA_T13X_NETLIST ), 
+    .USE_KLESSYDRA_NETLIST ( USE_KLESSYDRA_NETLIST ), 
     .RAM_SIZE   ( INSTR_RAM_SIZE ),
     .DATA_WIDTH ( AXI_DATA_WIDTH )
   )
@@ -1156,7 +1156,7 @@ module core_region
     .bypass_en_i  ( testmode_i     )
   );
 */
-if (USE_KLESSYDRA_T13X_NETLIST) begin : mem_gen_net
+if (USE_KLESSYDRA_NETLIST) begin : mem_gen_net
   sp_ram_wrap_netlist
   #(
   )

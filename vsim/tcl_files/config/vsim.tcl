@@ -1,16 +1,17 @@
 source tcl_files/config/vsim_ips.tcl
 
-if {$env(USE_KLESSYDRA_T13X_NETLIST) == 1} {
+if {$env(USE_KLESSYDRA_NETLIST) == 1} {
 set cmd "vsim -quiet $TB \
    -vopt \
   -L pulpino_lib \
   -L simprims_ver \
+  -L klessydra_functional_netlist_lib \
   $VSIM_IP_LIBS \
   +nowarnTRAN \
   +nowarnTSCALE \
   +nowarnTFMPC \
   +MEMLOAD=$MEMLOAD \
-  -gUSE_KLESSYDRA_T13X_NETLIST=$env(USE_KLESSYDRA_T13X_NETLIST) \
+  -gUSE_KLESSYDRA_NETLIST=$env(USE_KLESSYDRA_NETLIST) \
   -gUSE_ZERO_RISCY=$env(USE_ZERO_RISCY) \
   -gRISCY_RV32F=$env(RISCY_RV32F) \
   -gKLESS_LUTRAM_RF=$env(KLESS_LUTRAM_RF) \
@@ -40,6 +41,7 @@ set cmd "vsim -quiet $TB \
   -gKLESS_tracer_en=$env(KLESS_tracer_en) \
   -t ps \
   -voptargs=\"+acc -suppress 2103\" \
+  work.glbl \
   $VSIM_FLAGS"
 } else {
 set cmd "vsim -quiet $TB \
@@ -58,7 +60,6 @@ set cmd "vsim -quiet $TB \
   -gUSE_KLESSYDRA_OoO=$env(USE_KLESSYDRA_OoO) \
   -gUSE_KLESSYDRA_F0_3TH=$env(USE_KLESSYDRA_F0_3TH) \
   -gUSE_KLESSYDRA_FT13=$env(USE_KLESSYDRA_FT13) \
-  -gUSE_KLESSYDRA_T13X_NETLIST=$env(USE_KLESSYDRA_T13X_NETLIST) \
   -gUSE_ZERO_RISCY=$env(USE_ZERO_RISCY) \
   -gRISCY_RV32F=$env(RISCY_RV32F) \
   -gKLESS_LUTRAM_RF=$env(KLESS_LUTRAM_RF) \

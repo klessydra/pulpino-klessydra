@@ -5,7 +5,7 @@ source ${PULP_PATH}/vsim/vcompile/colors.csh
 # Settings
 ##############################################################################
 
-set IP=kless_t13_netlist_functional
+set IP=klessydra_functional_netlist
 set IP_NAME="Klessydra_Netlist_Functional"
 
 

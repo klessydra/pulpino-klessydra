@@ -29,6 +29,8 @@ echo ""
 
 # IP blocks
 source ${PULP_PATH}/vsim/vcompile/vcompile_ips.csh  || exit 1
+tcsh ${PULP_PATH}/vsim/vcompile/netlist/vcompile_glbl_netlists.csh  || exit 1
+tcsh ${PULP_PATH}/vsim/vcompile/netlist/vcompile_klessydra_netlists.csh  || exit 1
 
 source ${PULP_PATH}/vsim/vcompile/rtl/vcompile_pulpino.sh  || exit 1
 source ${PULP_PATH}/vsim/vcompile/rtl/vcompile_tb.sh       || exit 1

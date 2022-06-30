@@ -29,15 +29,15 @@ module tb;
   parameter  CLK_USE_FLL    = 0;  // 0 or 1
   parameter  TEST           = ""; //valid values are "" (NONE), "DEBUG"
   parameter  USE_ZERO_RISCY = 0;
-  parameter  USE_KLESSYDRA_T0_2TH = 0;
-  parameter  USE_KLESSYDRA_T0_3TH = 0;
-  parameter  USE_KLESSYDRA_T1_3TH = 0;
-  parameter  USE_KLESSYDRA_M      = 0;
-  parameter  USE_KLESSYDRA_S1     = 0;
-  parameter  USE_KLESSYDRA_OOO    = 0;
-  parameter  USE_KLESSYDRA_F0_3TH = 0;
-  parameter  USE_KLESSYDRA_FT13   = 0;
-  parameter	 USE_KLESSYDRA_T13X_NETLIST = 0;
+  parameter  USE_KLESSYDRA_T0_2TH  = 0;
+  parameter  USE_KLESSYDRA_T0_3TH  = 0;
+  parameter  USE_KLESSYDRA_T1_3TH  = 0;
+  parameter  USE_KLESSYDRA_M       = 0;
+  parameter  USE_KLESSYDRA_S1      = 0;
+  parameter  USE_KLESSYDRA_OOO     = 0;
+  parameter  USE_KLESSYDRA_F0_3TH  = 0;
+  parameter  USE_KLESSYDRA_FT13    = 0;
+  parameter	 USE_KLESSYDRA_NETLIST = 0;
   parameter  RISCY_RV32F    = 0;
   parameter  ZERO_RV32M     = 1;
   parameter  ZERO_RV32E     = 0;
@@ -164,7 +164,7 @@ module tb;
     .USE_KLESSYDRA_OOO       ( USE_KLESSYDRA_OOO    ),
     .USE_KLESSYDRA_F0_3TH    ( USE_KLESSYDRA_F0_3TH ),
     .USE_KLESSYDRA_FT13      ( USE_KLESSYDRA_FT13   ),
-	  .USE_KLESSYDRA_T13X_NETLIST ( USE_KLESSYDRA_T13X_NETLIST ),
+	  .USE_KLESSYDRA_NETLIST   ( USE_KLESSYDRA_NETLIST ),
     .RISCY_RV32F             ( RISCY_RV32F    ),
     .ZERO_RV32M              ( ZERO_RV32M     ),
     .ZERO_RV32E              ( ZERO_RV32E     ),
