@@ -87,7 +87,7 @@ set(BOOT_LINKER_FLAGS      "-L${CMAKE_CURRENT_SOURCE_DIR}/ref -T${LDSCRIPT_BOOT}
 set(CMAKE_CXX_COMPILER "${CMAKE_C_COMPILER}")
 
 if (${USE_KLESSYDRA_TEST})
-  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-sized-deallocation")
+  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-sized-deallocation -std=gnu++17")
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
 endif()
