@@ -87,14 +87,13 @@ set(BOOT_LINKER_FLAGS      "-L${CMAKE_CURRENT_SOURCE_DIR}/ref -T${LDSCRIPT_BOOT}
 set(CMAKE_CXX_COMPILER "${CMAKE_C_COMPILER}")
 
 if (${USE_KLESSYDRA_TEST})
-  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-sized-deallocation")
+  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-sized-deallocation -std=gnu++17")
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
 endif()
 
 set(COREMARK_DEFS "${ITERATIONS}")
-set(KLESS_DEFINES "${TPS}" "${NUMOFELEMENTS}" "${TIME}" "${A_ORDER}" "${B_ORDER}" "${KLESS_SPM_A}" "${KLESS_SPM_B}" "${KLESS_SPM_C}" "${KLESS_SPM_D}" "-DUSE_KLESSYDRA_M=${USE_KLESSYDRA_M}") 
-        # For USE_KLESSYDRA_M, the prefix (-DUSE_KLESSYDRA_M) is inserted here instead of the bash script, because this variable is also passed to the software suite and not only passed the RTL
+set(KLESS_DEFINES "${TPS}" "${NUMOFELEMENTS}" "${TIME}" "${A_ORDER}" "${B_ORDER}" "${KLESS_SPM_A}" "${KLESS_SPM_B}" "${KLESS_SPM_C}" "${KLESS_SPM_D}")
 
 set(CMAKE_ASM_COMPILER "${CMAKE_C_COMPILER}")
 set(CMAKE_ASM_FLAGS    "${CMAKE_C_FLAGS}")
@@ -119,10 +118,11 @@ set(VSIM "vsim" CACHE FILEPATH "Path to the vsim executable")
  endif()
 
  include_directories(libs/klessydra_lib/general_libs/inc)
- include_directories(libs/klessydra_lib/bench_libs/inc)
- include_directories(libs/klessydra_lib/vgg_libs/inc)
- if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13})
+# Decomment to use Morph version
+if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
+if (${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
    include_directories(libs/klessydra_lib/dsp_libs/inc) 
+   include_directories(libs/klessydra_lib/cb_libs/inc) 
  endif()
    include_directories(libs/klessydra_lib/dsp_libs/inc) 
    
@@ -203,11 +203,6 @@ add_custom_target(vcompile.core.klessydra-f0-3th
   WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
   ${USES_TERMINAL})
 
-add_custom_target(vcompile.core.klessydra-ft13
-  COMMAND tcsh -c ./vcompile/vcompile_klessydra-ft13.csh
-  WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
-  ${USES_TERMINAL})
-
 add_custom_target(vcompile.core.zero
   COMMAND tcsh ./vcompile/vcompile_zero-riscy.csh
   WORKING_DIRECTORY ${PULP_MODELSIM_DIRECTORY}
@@ -221,11 +216,10 @@ add_custom_target(vcompile.core.netlist
 ################################################################################
 
 add_subdirectory(libs/klessydra_lib/general_libs)
-add_subdirectory(libs/klessydra_lib/bench_libs)
-add_subdirectory(libs/klessydra_lib/vgg_libs)
-
-if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13})
+if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
+#if (${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_T13X_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1})
   add_subdirectory(libs/klessydra_lib/dsp_libs)
+  add_subdirectory(libs/klessydra_lib/cb_libs)
 endif()
   
 add_subdirectory(libs/string_lib)
