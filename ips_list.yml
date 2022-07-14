@@ -112,8 +112,8 @@ fT13x:
 
 # Klessydra Software Suite
 Software-Test-Suite:
-  commit: master
+  commit: contextual_bandits
 
 # Klessydra Libraries
 Libraries:
-  commit: master
+  commit: contextual_bandits
