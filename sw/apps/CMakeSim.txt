@@ -162,7 +162,7 @@ macro(add_sim_targets NAME)
   add_custom_target(${NAME}.vsimc
     COMMAND ${CMAKE_COMMAND} -E remove stdout/*
     COMMAND ${CMAKE_COMMAND} -E remove FS/*
-    COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; run -a\\; exit\\;' mem save -o /home/pulpino-klessydra/sw/build/memory2.mem -f mti -data decimal -addr hex /tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/mem \\; exit\\;' >vsim.log"
+    COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; run -a\\; mem save -o /home/pulpino-klessydra/sw/build/memory2.mem -f mti -data decimal -addr hex /tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/mem \\; exit\\;' >vsim.log"
     COMMAND tail -n +1 -- ./stdout/*
     WORKING_DIRECTORY ./${SUBDIR}
     DEPENDS ${NAME}.slm.cmd ${NAME}.stim.txt ${NAME}.links
