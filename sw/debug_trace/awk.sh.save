@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Getting this script directory
+SCRIPT_DIR=$( cd -- $(dirname $0) > /dev/null ; pwd )
+
+exec_0=$SCRIPT_DIR/execution_0.txt
+trace_0=$SCRIPT_DIR/trace_0.txt
+
+exec_1=$SCRIPT_DIR/execution_1.txt
+trace_1=$SCRIPT_DIR/trace_1.txt
+
+exec_2=$SCRIPT_DIR/execution_2.txt
+trace_2=$SCRIPT_DIR/trace_2.txt
+
+exec0=$SCRIPT_DIR/execution0.txt
+trace0=$SCRIPT_DIR/trace_0.txt
+
+exec1=$SCRIPT_DIR/execution1.txt
+trace1=$SCRIPT_DIR/trace1.txt
+
+exec2=$SCRIPT_DIR/execution2.txt
+trace2=$SCRIPT_DIR/trace2.txt
+
+
+awk '!($1=$2="")' $exec_0 > trace_0
+awk '($1=$2="")'  $file_in_2 > $file_out_2
