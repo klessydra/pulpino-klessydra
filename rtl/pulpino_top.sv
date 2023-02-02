@@ -36,6 +36,7 @@ module pulpino_top
   parameter KLESS_CONTEXT_SWITCH         = 1,
 	parameter KLESS_THREAD_POOL_SIZE		   = 3,
   parameter KLESS_LUTRAM_RF              = 1,
+  parameter KLESS_LATCH_RF               = 0,
 	parameter KLESS_RV32E					         = 0,
 	parameter KLESS_RV32M					         = 1,
   parameter KLESS_superscalar_exec_en    = 1,
@@ -221,6 +222,7 @@ module pulpino_top
 	//Klessydra Parameters
    	.KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
     .KLESS_LUTRAM_RF               (KLESS_LUTRAM_RF),
+    .KLESS_LATCH_RF                (KLESS_LATCH_RF),
    	.KLESS_RV32E                   (KLESS_RV32E),
    	.KLESS_RV32M                   (KLESS_RV32M),
     .KLESS_superscalar_exec_en     (KLESS_superscalar_exec_en),

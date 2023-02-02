@@ -44,6 +44,7 @@ module core_region
   parameter KLESS_CONTEXT_SWITCH         = 1,
 	parameter KLESS_THREAD_POOL_SIZE       = 3,
   parameter KLESS_LUTRAM_RF              = 1,
+  parameter KLESS_LATCH_RF               = 0,
 	parameter KLESS_RV32E                  = 0,
 	parameter KLESS_RV32M					         = 1,
   parameter KLESS_superscalar_exec_en    = 1,
@@ -481,7 +482,8 @@ module core_region
       klessydra_heterogeneous_cluster
       #(
         .THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
-        .LUTRAM_RF               (KLESS_LUTRAM_RF),
+        .lutram_rf               (KLESS_LUTRAM_RF),
+        .latch_rf                (KLESS_LATCH_RF),
         .RV32E                   (KLESS_RV32E),
         .RV32M                   (KLESS_RV32M),
         .accl_en                 (KLESS_accl_en),
@@ -556,7 +558,8 @@ module core_region
       klessydra_top
       #(
         .THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
-        .LUTRAM_RF               (KLESS_LUTRAM_RF),
+        .lutram_rf               (KLESS_LUTRAM_RF),
+        .latch_rf                (KLESS_LATCH_RF),
         .RV32E                   (KLESS_RV32E),
         .RV32M                   (KLESS_RV32M),
         .accl_en                 (KLESS_accl_en),
@@ -630,7 +633,7 @@ module core_region
       klessydra_s1_core
       #(
         .THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
-        .LUTRAM_RF               (KLESS_LUTRAM_RF),
+        .lutram_rf               (KLESS_LUTRAM_RF),
         .RV32E                   (KLESS_RV32E),
         .RV32M                   (KLESS_RV32M),
         .accl_en                 (KLESS_accl_en),

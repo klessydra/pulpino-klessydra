@@ -38,11 +38,12 @@ then
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	KLESS_CONTEXT_SWITCH=0          # Enables the context switching between cores
 	KLESS_THREAD_POOL_SIZE=3        # Changing the TPS to less than "number of pipeline stages-1" is not allowed. And making it bigger than "pipeline stages-1" is okay but not recommended
-	KLESS_LUTRAM_RF=0 				# Changes the regfile from flip-flop type into BRAM type
+	KLESS_LUTRAM_RF=0 				# Changes the regfile from flip-flop type into LUTRAM type
+	KLESS_LATCH_RF=0                # Changes the regfile from flip-flop type into Latch type (only works if lutram_rf is set to 0)
 	KLESS_RV32E=0                   # Regfile size, Can be set to 32 for RV32E being 0 else 16 for RV32E being set to 1, also chnges the RISCV compiler and Klessydra startup file accordingly
 	KLESS_RV32M=1                   # Enable the M-extension of the risc-v instruction set
 	KLESS_superscalar_exec_en=1		# Enables superscalar execution when set to 1, else the stall of the pipeline will depend on tha latency of the instruction
-	KLESS_morph_en=1                # Enables hardware metamorphisis, that lets the IMT processor morph into an in-order execution processor to avoid stalling
+	KLESS_morph_en=1                # Enables hardware metamorphosis, that lets the IMT processor morph into an in-order execution processor to avoid stalling
 	KLESS_fetch_stage_en=0          # Enables the an additional fetch stage which handles some of the data dependency logic (needs morph_en to be set or THREAD_POOL_SIZE < THREAD_POOL_BASELINE)
 	KLESS_branch_predict_en=1       # Enables a 1-bit branch predictor (if set without btb_en), that predicts a taken branch if the offset is negative, else it preicts a positive offset
 	KLESS_btb_en=0                  # Enables the branch target buffer of size defined in 2^btb_len, to enable the btb, branch_predict_en must be set to '1'
@@ -254,6 +255,7 @@ cmake "$PULP_GIT_DIRECTORY"/sw/ \
     -DKLESS_CONTEXT_SWITCH="$KLESS_CONTEXT_SWITCH" \
 	-DKLESS_THREAD_POOL_SIZE="$KLESS_THREAD_POOL_SIZE" \
 	-DKLESS_LUTRAM_RF="$KLESS_LUTRAM_RF" \
+	-DKLESS_LATCH_RF="$KLESS_LATCH_RF" \
 	-DKLESS_RV32E="$KLESS_RV32E" \
 	-DKLESS_RV32M="$KLESS_RV32M" \
 	-DKLESS_superscalar_exec_en="$KLESS_superscalar_exec_en" \
