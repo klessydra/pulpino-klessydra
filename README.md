@@ -100,7 +100,8 @@ PULPino-Klessydra uses multiple git submodules. The submodules from PULPino were
 	When the build is done, add the path **_<path_to_toolchain>/ri5cy_gnu_toolchain/install/bin_**, to the $PATH variable
 
 3.	To run the klessydra tests, you have to the Klessydra version of the riscv-gnu-toolchain , and build it:
-4.	  https://github.com/klessydra/riscv-gnu-toolchain	 
+	
+	https://github.com/klessydra/riscv-gnu-toolchain	 
 
 4.	Download PULPino-Klessydra:
 
