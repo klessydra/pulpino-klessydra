@@ -81,7 +81,7 @@ An intuitive GUI, one of the submodules downloaded by this repo, can be used to 
 
 PULPino-Klessydra uses multiple git submodules. The submodules from PULPino were integrated directly into this repository to avoid any conflicts in case those submodules were removed in the future. The submodules from Klessydra can be directly downloaded, fetched. and updated once the update python script is launched. 
 
-## Version Control
+## USAGE
 
 1.	Install the following packeges:
 		
