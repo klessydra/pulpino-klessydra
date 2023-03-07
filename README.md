@@ -21,13 +21,13 @@ Klessydra started from a single cycle in-order execution core in the early days,
 
 PULPino is an open-source single-core microcontroller system, based on 32-bit
 RISC-V cores developed at ETH Zurich. PULPino is configurable to use either 
-the RISCY or the zero-riscy core.
+the RISCY or the Zero-riscy core.
 
 RISCY is an in-order, single-issue core with 4 pipeline stages and it has
 an IPC close to 1, full support for the base integer instruction set (RV32I),
 compressed instructions (RV32C) and multiplication instruction set
 extension (RV32M). It can be configured to have single-precision floating-point
-instruction set extension (RV32F). It implements several ISA extensions such as:
+instruction set extension (RV32F). It implements several custom ISA extensions such as:
 hardware loops, post-incrementing load and store instructions, bit-manipulation
 instructions, MAC operations, support fixed-point operations, packed-SIMD instructions
 and the dot product. It has been designed to increase the energy efficiency of
@@ -35,7 +35,7 @@ in ultra-low-power signal processing applications.
 RISCY implementes a subset of the 1.9 privileged specification.
 Further informations can be found in http://ieeexplore.ieee.org/abstract/document/7864441/.
 
-zero-riscy is an in-order, single-issue core with 2 pipeline stages and it has
+Zero-riscy is an in-order, single-issue core with 2 pipeline stages and it has
 full support for the base integer instruction set (RV32I) and 
 compressed instructions (RV32C). It can be configured to have multiplication instruction set
 extension (RV32M) and the reduced number of registers extension (RV32E).
@@ -74,28 +74,24 @@ PULPino has the following requirements
 
 ## ISA Support
 
-PULPino can run either with RISCY or zero-riscy.
-The software included in this repository is compatible with both the cores
-and automatically targets the correct ISA based on the flags used.
-The simulator (modelsim) must be explicitely told which edition you want to build.
-Use the environment variable `USE_ZERO_RISCY` and set it to either `1` for zero-riscy or 
-`0` for RISCY.
+PULPino originally could run either with RISCY or zero-riscy. Now it is integrated with all the shades of the Klessydra cores
+An intuitive GUI, one of the submodules downloaded by this repo, can be used to configure PULPino-Klessydra to use and customize the cores, and run the tests.
 
 ## Version Control
 
-PULPino uses multiple git subrepositories
+PULPino-Klessydra uses multiple git submodules. The submodules from PULPino were integrated directly into this repository to avoid any conflicts in case those submodules were removed in the future. The submodules from Klessydra can be directly downloaded, fetched. and updated once the update python script is launched. 
 
-To clone those subrepositores and update them, use
+To clone those sub-modules use
 
     ./update-ips.py
 
-This script will read the `ips_lists.txt` file and update to the versions
+This script will read the `ips_list.yml` file and update to the versions
 specified in there. You can choose specific commits, tags or branches.
 
 
 ## Documentation
 
-There is a preliminary datasheet available that includes a block diagram and a memory map of PULPino.
+There is a preliminary PULPino datasheet available that includes a block diagram and a memory map of PULPino.
 See docs/datasheet/ in this repository.
 
 It is written in LaTeX and there is no pdf included in the repository. Simply type
@@ -118,36 +114,10 @@ This script can be found in the sw subfolder of the git repository.
 Modify the cmake-configure script to your needs and execute it inside the build folder.
 This will setup everything to perform simulations using ModelSim.
 
-Four cmake-configure bash scripts have been already configured:
-
-1) cmake_configure.riscv.gcc.sh
-
-It automatically selects the RISCY cores and compiles SW with all the PULP-extensions 
-and the RV32IM support.
-The GCC ETH compiler is needed and the GCC march flag set to "IMXpulpv2".
-
-2) cmake_configure.riscvfloat.gcc.sh
-
-It automatically selects the RISCY cores and compiles SW with all the PULP-extensions 
-and the RV32IMF support.
-The GCC ETH compiler is needed and he GCC march flag set to "IMFXpulpv2".
-
-3) cmake_configure.zeroriscy.gcc.sh
-
-It automatically selects the zero-riscy cores and compiles SW with the RV32IM support
-(march flag set to RV32IM).
-
-4) cmake_configure.microriscy.gcc.sh
-
-It automatically selects the zero-riscy cores and compiles SW with the RV32E support.
-The slim GCC ETH compiler is needed and he GCC march flag set to "RV32I" and the "-m16r"
-is passed to the compiler to use only the RV32E ISA support.
+Run the KVIEW.py application to configure the Klessydra or the RISCY cores. Then compile them and run
 
 
-Activate the RVC flag in the cmake file if compressed instructions are desired.
-
-
-Inside the build folder, execute
+Inside the build folder or KVIEW, execute:
 
     make vcompile
 
@@ -186,7 +156,7 @@ to which the jtag bridge can connect to.
 
 ## Utilities
 
-We additionally provide some utilitiy targets that are supposed to make
+PULPino additionally provide some utilitiy targets that are supposed to make
 development for PULPino easier.
 
 For disassembling a program call
@@ -199,16 +169,8 @@ To regenerate the bootcode and copy it to the `rtl` folder use
 
 ## FPGA
 
-PULPino can be synthesized and run on a ZedBoard.
+PULPino-Klessydra can be synthesized and run on a ZedBoard.
 Take a look at the `fpga` subfolder for more information.
-
-## Creating a tarball of the PULPino sources
-
-If for some reason you don't want to use the git sub-repository approach, you
-can create a tarball of the whole design by executing `./create-tarball.py`.
-This will download the latest PULPino sources, including all IPS, remove the
-git internal folders and create a tar gz.
-
 
 ## Arduino compatible libraries
 
