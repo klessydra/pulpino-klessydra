@@ -81,12 +81,64 @@ An intuitive GUI, one of the submodules downloaded by this repo, can be used to 
 
 PULPino-Klessydra uses multiple git submodules. The submodules from PULPino were integrated directly into this repository to avoid any conflicts in case those submodules were removed in the future. The submodules from Klessydra can be directly downloaded, fetched. and updated once the update python script is launched. 
 
-To clone those sub-modules use
+## Version Control
 
-    ./update-ips.py
+1.	Install the following packeges:
+		
+		sudo apt-get install git cmake python-yaml tcsh autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
 
-This script will read the `ips_list.yml` file and update to the versions
-specified in there. You can choose specific commits, tags or branches.
+2.	Download and build the "ri5cy_gnu_toolchain" from PULP
+
+		a) git clone https://github.com/pulp-platform/ri5cy_gnu_toolchain.git
+		
+		b) cd ri5cy_gnu_toolchain
+		
+		c) make ZERORISCY=1
+
+		d) in case you need to build for RISCY cores, then just do "make" instead, and then add the symbolic links as shown from step 4.
+		
+	When the build is done, add the path **_<path_to_toolchain>/ri5cy_gnu_toolchain/install/bin_**, to the $PATH variable
+
+3.	To run the klessydra tests, you have to the Klessydra version of the riscv-gnu-toolchain , and build it.  https://github.com/klessydra/riscv-gnu-toolchain	 
+
+4.	Download PULPino-Klessydra:
+
+		a) git clone https://github.com/klessydra/pulpino-klessydra
+		
+		b) cd pulpino-klessydra
+		
+		c) ./update-ips.py	
+
+5.	OPTIONAL: After the update scipt is done, then you will be able to test Klessydra-m.
+		-Navigate to "sw" folder inside pulpino and execute the following commands
+
+		a) mkdir build
+		
+		b) cp cmake_configure.klessydra-m.gcc.sh build/
+		
+		c) run KView.py and configure and run everything from the GUI or continue through steps d-f
+
+		d) cd build
+		
+		e) ./cmake_configure.klessydra-m.gcc.sh
+		   
+		f) make vcompile
+
+		For running Klessydra tests; make sure the variable "USE_KLESSYDRA_TEST" in the above bash script is set to '1' by default. You only need to build and run your test
+		g) To run an accelerated test (e.g.  make KDOTP_test.vsimc)
+
+		h) To run a non-accelerated test (e.g.  make barrier_test.vsimc)
+		
+		i) You can also run one of the PULPino native tests,  (e.g. make testALU.vsimc)
+			
+	IT"S DONE!!!!!!
+
+Supplimentary Information:
+
+6.	In order to run tests under Modelsim gui mode, navigate again to the build folder and do the following: make nameofthetest.vsim (while .vsimc runs the test under Modelsim in background)
+
+
+7. Klessydra libraries are available, and their functions are described in the software runtime manual found in the Docs folder
 
 
 ## Documentation
