@@ -117,3 +117,7 @@ Software-Test-Suite:
 # Klessydra Libraries
 Libraries:
   commit: master
+
+# Klessydra GUI App
+KView:
+  commit: main

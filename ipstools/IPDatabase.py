@@ -106,14 +106,14 @@ class IPDatabase(object):
 
     def import_yaml(self, ip_name, filename, ip_path, domain=None, alternatives=None):
         if not os.path.exists(os.path.dirname(filename)):
-            if (ip_name != "Software-Test-Suite" and ip_name != "Libraries"):
+            if (ip_name != "Software-Test-Suite" and ip_name != "Libraries" and ip_name != "KView"):
                 print(tcolors.ERROR + "ERROR: ip '%s' does not have src_files.yml file. File path: %s" % (ip_name, filename) + tcolors.ENDC)
                 sys.exit(1)
         try:
             with open(filename, "rb") as f:
                 ip_dic = ordered_load(f, yaml.SafeLoader)
         except IOError:
-            if (ip_name != "Software-Test-Suite" and ip_name != "Libraries"):
+            if (ip_name != "Software-Test-Suite" and ip_name != "Libraries" and ip_name != "KView"):
                 print(tcolors.WARNING + "WARNING: Skipped ip '%s' as it has no src_files.yml file." % ip_name + tcolors.ENDC)
             return
 
@@ -208,6 +208,8 @@ class IPDatabase(object):
 	            ip['path'] = "../sw/apps/klessydra_tests"
             elif (ip['name'] == "Libraries"):
                 ip['path'] = "../sw/libs/klessydra_lib"
+            elif (ip['name'] == "KView"):
+                ip['path'] = "../KView"
             os.chdir(cwd)
             # check if directory already exists, this hints to the fact that we probably already cloned it
             if os.path.isdir("./%s" % ip['path']):
@@ -284,7 +286,7 @@ class IPDatabase(object):
 
                 ret = execute("%s clone %s/%s.git %s" % (git, ip['remote'], ip['name'], ip['path']))
                 if ret != 0:
-                    if (ip['name'] != "Software-Test-Suite" and ip['name'] != "Libraries"):
+                    if (ip['name'] != "Software-Test-Suite" and ip['name'] != "Libraries" and ip['name'] != "KView"):
                         print(tcolors.ERROR + "ERROR: could not clone, you probably have to remove the '%s' directory." % ip['name'] + tcolors.ENDC)
                         errors.append("%s - Could not clone" % (ip['name']));
                         continue
