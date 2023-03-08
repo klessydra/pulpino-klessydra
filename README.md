@@ -155,43 +155,6 @@ It is written in LaTeX and there is no pdf included in the repository. Simply ty
 inside the folder to generate the pdf. Note that you need a working version of latex for this step.
 
 
-## Running simulations
-
-The software is built using CMake.
-Create a build folder somewhere, e.g. in the sw folder
-
-    mkdir build
-
-Copy the cmake-configure.{*}.gcc.sh bash script to the build folder.
-This script can be found in the sw subfolder of the git repository.
-
-Modify the cmake-configure script to your needs and execute it inside the build folder.
-This will setup everything to perform simulations using ModelSim.
-
-Run the KVIEW.py application to configure the Klessydra or the RISCY cores. Then compile them and run
-
-
-Inside the build folder or KVIEW, execute:
-
-    make vcompile
-
-to compile the RTL libraries using ModelSim.
-
-To run a simulation in the modelsim GUI use
-
-    make helloworld.vsim
-
-
-To run simulations in the modelsim console use
-
-    make helloworld.vsimc
-
-This will output a summary at the end of the simulation.
-This is intended for batch processing of a large number of tests.
-
-Replace helloworld with the test/application you want to run.
-
-
 ### Using ninja instead of make
 
 You can use ninja instead make to build software for PULPino, just replace all
