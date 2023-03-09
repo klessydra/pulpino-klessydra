@@ -1,7 +1,27 @@
 #!/bin/bash
 
 #export PATH=/compilerpath/:${PATH}
-
+# to run contextual bandits
+#if (($#!=3))
+#then
+#	M=1;	F=1;	D=2;
+#else
+#	M=$1;	F=$2;	D=$3;
+#fi
+#echo -e "\e[94mConfiguration:\nM: \e[39m$M,\e[94mF: \e[39m$F, \e[94mD: \e[39m$D"
+#if (($F==1))
+#then
+#	shared=1
+#else
+#	shared=0
+#fi
+#
+#if (($M==3))
+#then
+#	m_enabled=1
+#else
+#	m_enabled=0
+#fi
 
 if [ ! "$automate_en" ]
 then
