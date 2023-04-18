@@ -101,7 +101,8 @@ actual_instrram_size=$(( 16#$actual_instrram_size_h ))			# INSTRRAM size in deci
 actual_rom_size=$(( 16#${actual_rom_size_h} ))					# ROM size in decimal
 actual_data_ram_size=$(( 16#${actual_data_ram_size_h} )) 		# DATA_RAM size in decimal
 actual_stack_size=$(( 16#${actual_stack_size_h} ))              # STACK size in decimal
-
+actual_total_data_ram_size=$(( actual_data_ram_size + actual_stack_size )) # DATA_RAM + STACK size in decimal
+echo "actual_total_data_ram_size=$actual_total_data_ram_size"
 clear
 echo -e "\e[93m-----------------------------------\e[39m"
 echo -e "\e[93mKLESSYDRA MEMORY OVERVIEW \e[39m"
@@ -326,7 +327,9 @@ then
 			# Debug info
 			echo "DATA_RAM starting address: 0x$actual_data_ram_origin_h"
 			echo "DATA_RAM size: 0x$actual_data_ram_size_h, that are $actual_data_ram_size bytes"
-			
+			echo "Updating the data_ram size will also update the stack position, which is at the end of the data_ram memory and currently occupies $actual_stack_size bytes"
+            echo "if you also want to change the stack size, launch again the script and select the options: 2 and then 4"
+
 			# Reading new size and converting it
 			echo -n "New desired size (start with 0x to specify an hexadecimal number): "
 			read new_size_input
@@ -341,12 +344,17 @@ then
 				new_size=${new_size_input}
 				new_size_h=$(echo "obase=16;${new_size}" | bc)
 			fi
-				
-            # Update the DATA_RAM size in the linker script, core_region and sp_ram_wrap
+
+			new_total_data_ram_size=$((new_size+actual_stack_size))
+            # Update the DATA_RAM size in the linker script, core_region and sp_ram_wrap 
 			sed -i -e "s/\(dataram\s*:\s*ORIGIN\s*=\s*\)0x$actual_data_ram_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_data_ram_size_h*/\10x$actual_data_ram_origin_h\20x$new_size_h/g" $LINK_COMMON
-            sed -i -e "s/\(\s*DATA_RAM_SIZE\s*=\s*\)$actual_data_ram_origin_h\b/\1$new_size/g" $CORE_REGION
-            sed -i -e "s/\(\s*RAM_SIZE\s*=\s*\)$actual_instrram_size\b/\1$new_size/g" $SP_RAM_WRAP
+            sed -i -e "s/\(\s*DATA_RAM_SIZE\s*=\s*\)$actual_total_data_ram_size\b/\1$new_total_data_ram_size/g" $CORE_REGION
+            sed -i -e "s/\(\s*RAM_SIZE\s*=\s*\)$actual_total_data_ram_size\b/\1$new_total_data_ram_size/g" $SP_RAM_WRAP
             echo -ne "DATA_RAM ---> in files link.common.ld, core_region.sv and sp_ram_wrap.sv. ";cat $LINK_COMMON | grep -n "dataram" | head -1 | cut -d ":" -f 3		            
+
+            # Update the stack position
+            new_stack_origin=$((actual_data_ram_origin+new_size))
+			new_stack_origin_h=$(echo "obase=16;${new_stack_origin}" |bc)
 
             # Update the stack position in the linker scripts
             sed -i -e "s/\(stack\s*:\s*ORIGIN\s*=\s*\)0x$actual_stack_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_stack_size_h*/\10x$new_stack_origin_h\20x$actual_stack_size_h/g" $LINK_COMMON
@@ -379,7 +387,6 @@ then
 			fi
 
             # Update the stack position in the linker scripts
-            echo -e "STACK ----> 0x$actual_stack_size_h ---> 0x$new_size_h"           
             sed -i -e "s/\(stack\s*:\s*ORIGIN\s*=\s*\)0x$actual_stack_origin_h*\(, \s*LENGTH\s*=\s*\)0x$actual_stack_size_h*/\10x$actual_stack_origin_h\20x$new_size_h/g" $LINK_COMMON
             sed -i -e "s/\(stack\s*:\s*ORIGIN\s*=\s*\)0x$actual_stack_origin_h*\(, \s*LENGTH\s*=\s*\)0x$actual_stack_size_h*/\10x$actual_stack_origin_h\20x$new_size_h/g" $LINK_BOOT	
 			# Print the new stack position 				
@@ -484,9 +491,9 @@ then
             echo -n "New desired address (in hex): 0x"
             read new_address_h
             new_address=$((16#${new_address_h}))
-            if ((new_address<actual_data_ram_origin+actual_data_ram_size))
+            if ((new_address!=(actual_data_ram_origin+actual_data_ram_size)))
             then
-                echo -e "\e[91mError:\e[39m the required starting address overlap the previous memory region!! If you want to reduce the previous memory region size use the option 2 in Klessydra Memory Manager and try again.\n"
+                echo -e "\e[91mError:\e[39m attention, the stack should be placed at the end of DATA_RAM. This is automatically done by moving the starting address of dataram or increasing its size.\n"
                 exit
             fi
             new_stack_origin_h=$new_address_h
@@ -517,11 +524,11 @@ then
 		
 		# DATA_RAM reset		
 		new_data_ram_origin_h=00100000
-		new_data_ram_size_h=EF00000		
-		new_data_ram_size=267386880
+		new_data_ram_size_h=EF00000	
+        new_total_data_ram_size=267386880
 		sed -i -e "s/\(dataram\s*:\s*ORIGIN\s*=\s*\)0x$actual_data_ram_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_data_ram_size_h*/\10x$new_data_ram_origin_h\20x$new_data_ram_size_h/g" $LINK_COMMON
-		sed -i -e "s/\(\s*DATA_RAM_SIZE\s*=\s*\)$actual_data_ram_origin_h\b/\1$new_data_ram_size/g" $CORE_REGION
-        sed -i -e "s/\(\s*RAM_SIZE\s*=\s*\)$actual_instrram_size\b/\1$new_data_ram_size/g" $SP_RAM_WRAP	
+		sed -i -e "s/\(\s*DATA_RAM_SIZE\s*=\s*\)$actual_total_data_ram_size\b/\1$new_total_data_ram_size/g" $CORE_REGION
+        sed -i -e "s/\(\s*RAM_SIZE\s*=\s*\)$actual_total_data_ram_size\b/\1$new_total_data_ram_size/g" $SP_RAM_WRAP	
 		
 		# STACK reset
 		new_stack_origin_h=0F000000
