@@ -66,7 +66,7 @@ while ! $valid; do
 	echo "- 7: Exit"
     read -r option
     echo -e "\e[93m-----------------------------------\e[39m"
-
+ 
     if ! (( option == 1 || option == 2 || option == 3 || option == 4 || option == 5 || option == 6 || option == 7 )); then
         echo -e "\e[91mError:\e[39m Not a valid option, please try again.\n"
 	elif (( option == 7 )); then
@@ -549,7 +549,7 @@ then
     # Read the actual SPM size
     echo "Specify the name of your build folder (e.g. Morph_build): "
     read build_folder
-    actual_SPM_SIZE=$(cat pulpino-klessydra/sw/$build_folder/cmake_configure.klessydra-m.gcc.sh|grep KLESS_Addr_Width|head -1|cut -d "=" -f 2 | cut -d "#" -f 1|tr -d "[:blank:]")
+    actual_SPM_SIZE=$(cat $PULPINO_DIR/sw/$build_folder/cmake_configure.klessydra-m.gcc.sh|grep KLESS_Addr_Width|head -1|cut -d "=" -f 2 | cut -d "#" -f 1|tr -d "[:blank:]")
     echo -n "Actual addr_width: $actual_SPM_SIZE, SPMs size = "
     echo "2^$actual_SPM_SIZE" | bc
     
@@ -564,7 +564,7 @@ then
     fi
 
     # Replace the actual SPM size with the new one
-    sed -i -e "s/KLESS_Addr_Width=\b[0-9]\{2\}\b/KLESS_Addr_Width=$new_SPM_SIZE/g" pulpino-klessydra/sw/$build_folder/cmake_configure.klessydra-m.gcc.sh
+    sed -i -e "s/KLESS_Addr_Width=\b[0-9]\{2\}\b/KLESS_Addr_Width=$new_SPM_SIZE/g" $PULPINO_DIR/sw/$build_folder/cmake_configure.klessydra-m.gcc.sh
     echo -n "New addr_width: $new_SPM_SIZE, NEW SPMs size = "
     echo "2^$new_SPM_SIZE" | bc
     echo -e "\e[93m-----------------------------------\e[39m"
@@ -606,5 +606,6 @@ then
     echo "program_opened=true" >> "$CONFIG_FILE"
 
 fi
+
 
 
