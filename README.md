@@ -7,7 +7,7 @@
 
 This project is a merger of Pulpino and Klessydra. It is an integration of the Klessydra Cores, and software test suite and libraries inside PULPino
 
-# Klesydra Introduction
+# Klessydra Introduction
 
 Klessydra is a family of processing cores designed at the Digital System's Laboratory at the University of Sapienza in Rome. Klessydra features a whole class of different processing cores ranging from in-order execution to out-of-order execution cores, single threaded to multi-threaded, from non-fault tolerant to fault tolerant temporaly redundant or spatially redundant, and lastly from hardware static to hardware dynamic processor architectures.
 
