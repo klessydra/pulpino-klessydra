@@ -85,7 +85,14 @@ PULPino-Klessydra uses multiple git submodules. The submodules from PULPino were
 
 1.	Install the following packeges:
 		
-		sudo apt-get install git cmake python-yaml tcsh autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
+		sudo apt install python2.7
+		sudo apt install python-pip
+		pip2 install pyyaml
+		cd $(dirname $(which python2.7))
+		sudo ln -s python2.7 python
+		sudo apt-get install git cmake tcsh autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
+
+libexpat-dev
 
 2.	Download and build the "ri5cy_gnu_toolchain" from PULP
 
