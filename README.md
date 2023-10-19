@@ -218,3 +218,7 @@ Automatic change of the memory map in the Klessydra RISC-V processor. This repos
 - spi_debug_test.svh		-> tb/spi_debug_test.svh								    18, 44, 57
 - RTL-Program_Counter_unit.vhd	-> /ips/Morph/klessydra-m/RTL-Program_Counter_unit.vhd	421, 425
 - pulpino.h 						-> sw/libs/sys_lib/inc/pulpino.h 						28
+
+  Actual Version:
+  ![image](https://github.com/MarcoAngioli/Klessydra_memory_changes/assets/104903225/d11b8382-9834-4885-a405-23a3be95300f)
+
