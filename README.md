@@ -207,3 +207,14 @@ beginning of the program:
 
 Take a look at the `sw/libs/Arduino_libs` subfolder for more information about
 the status of the currently supported libraries.
+Automatic change of the memory map in the Klessydra RISC-V processor. This repository contains all the files to patch. 
+
+**Actual Status:** not completed
+
+
+**TODO:**
+- apb_bus.sv						-> /rtl/includes/apb_bus.sv								   19-54				tutti gli indirizzi 32'h1A10_0000 => 		32'h9A10_0000
+- tb_spi_pkg.sv					-> /tb/tb_spi_pkg.sv										    506
+- spi_debug_test.svh		-> tb/spi_debug_test.svh								    18, 44, 57
+- RTL-Program_Counter_unit.vhd	-> /ips/Morph/klessydra-m/RTL-Program_Counter_unit.vhd	421, 425
+- pulpino.h 						-> sw/libs/sys_lib/inc/pulpino.h 						28
