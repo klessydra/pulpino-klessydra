@@ -213,7 +213,7 @@ Automatic change of the memory map in the Klessydra RISC-V processor. This repos
 
 
 **TODO:**
-- [] apb_bus.sv						-> /rtl/includes/apb_bus.sv								   19-54				tutti gli indirizzi 32'h1A10_0000 => 		32'h9A10_0000
+- [x]  apb_bus.sv						-> /rtl/includes/apb_bus.sv								   19-54				tutti gli indirizzi 32'h1A10_0000 => 		32'h9A10_0000
 - [x] tb_spi_pkg.sv					-> /tb/tb_spi_pkg.sv										    506
 - [x] spi_debug_test.svh		-> tb/spi_debug_test.svh								    18, 44, 57
 - [] RTL-Program_Counter_unit.vhd	-> /ips/Morph/klessydra-m/RTL-Program_Counter_unit.vhd	421, 425
