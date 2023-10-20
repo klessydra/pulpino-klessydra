@@ -209,15 +209,76 @@ Take a look at the `sw/libs/Arduino_libs` subfolder for more information about
 the status of the currently supported libraries.
 Automatic change of the memory map in the Klessydra RISC-V processor. This repository contains all the files to patch. 
 
-**Actual Status:** not completed
+**Actual Status:** Under Test
+
+** List of the patched files:**
+
+```
+Klessydra_memory_changes
+├── ips
+├── rtl
+│   ├── core_region.sv
+│   ├── includes
+│   │   └── apb_bus.sv
+│   ├── instr_ram_wrap.sv
+│   ├── periph_bus_wrap.sv
+│   ├── peripherals.sv
+│   ├── pulpino_top.sv
+│   └── sp_ram_wrap.sv
+├── sw
+│   ├── apps
+│   │   └── CMakeSim.txt
+│   ├── cmake_configure.klessydra-m.gcc.sh
+│   ├── CMakeLists.txt
+│   ├── libs
+│   │   ├── klessydra_lib
+│   │   │   └── general_libs
+│   │   │       └── inc
+│   │   │           └── klessydra_defs.h
+│   │   └── sys_lib
+│   │       └── inc
+│   │           └── pulpino.h
+│   ├── ref
+│   │   ├── crt0.klessydra_E.S
+│   │   ├── crt0.klessydra.S
+│   │   ├── link.boot.ld
+│   │   └── link.common.ld
+│   └── utils
+│       ├── s19toboot.py
+│       └── s19toslm.py
+├── tb
+│   ├── spi_debug_test.svh
+│   ├── tb_spi_pkg.sv
+│   └── tb.sv
+└── vsim
+    └── tcl_files
+        └── config
+            └── vsim.tcl
+```
+** DESCRIPTION **
+The cmake_configure.klessydra-m.gcc.sh includes the following new variables:
+-    INSTRRAM_SIZE
+-    INSTRRAM_ORG
+-    GLOBALRAM_SIZE
+-    GLOBALRAM_ORG
+-    ROM_SIZE
+-    ROM_ORG
+-    HART_STACK_SIZE
+-    PERIPHERALS
+To modify the memory map of klessydra specifying each region's starting address and size.
+In fact, thanks to the new updates, all the files are parametric.
+The specified information is automatically propagated in the hardware and software libraries, allowing for an easy and fast memory reconfiguration.
+In the following a brief explanation of how the variables are propagated from the cmake down to the specific files is provided both by the means of text and a graphic diagram.
+For the hardware files: the variables specified in the CMAKECONFIGURE are passed to the CMakeSim.txt, then to the vsim.tcl, tb.sv, 
 
 
+
+
+
+   
 **TODO:**
-- [x]  apb_bus.sv						-> /rtl/includes/apb_bus.sv								   19-54				tutti gli indirizzi 32'h1A10_0000 => 		32'h9A10_0000
-- [x] tb_spi_pkg.sv					-> /tb/tb_spi_pkg.sv										    506
-- [x] spi_debug_test.svh		-> tb/spi_debug_test.svh								    18, 44, 57
 - [] RTL-Program_Counter_unit.vhd	-> /ips/Morph/klessydra-m/RTL-Program_Counter_unit.vhd	421, 425
-- [x] pulpino.h 						-> sw/libs/sys_lib/inc/pulpino.h 						28
+
 
   Actual Version:
   ![image](https://github.com/MarcoAngioli/Klessydra_memory_changes/assets/104903225/d11b8382-9834-4885-a405-23a3be95300f)
