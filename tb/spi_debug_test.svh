@@ -39,7 +39,7 @@
 
     logic [31:0] addr_int;
     begin
-      addr_int = 32'h1A11_0000 + addr;
+      addr_int = PERIPHERALS+32'hA104000+32'hC000 + addr;
       spi_read_word(use_qspi, addr_int, data);
     end
   endtask
@@ -50,7 +50,7 @@
 
     logic [31:0] addr_int;
     begin
-      addr_int = 32'h1A11_0000 + addr;
+      addr_int = PERIPHERALS+32'hA104000+32'hC000 + addr;
       spi_write_word(use_qspi, addr_int, data);
     end
   endtask
@@ -2028,9 +2028,9 @@
       end
 
       // wake-up core in EU
-      debug_mem_sw(`EVENT_UNIT_BASE_ADDR + 32'h14, 32'hFFFF_FFFF);
+      debug_mem_sw(PERIPHERALS+32'hA104000 + 32'h14, 32'hFFFF_FFFF);
       // clear buffer
-      debug_mem_sw(`EVENT_UNIT_BASE_ADDR + 32'h14, 32'h0000_0000);
+      debug_mem_sw(PERIPHERALS+32'hA104000 + 32'h14, 32'h0000_0000);
 
       debug_write(`DBG_CTRL_REG, 32'h0000_0000); // RESUME, but NO Single Step
 
@@ -2072,12 +2072,12 @@
       end
 
       // wake-up core in EU
-      debug_mem_sw(`EVENT_UNIT_BASE_ADDR + 32'h14, 32'hFFFF_FFFF);
+      debug_mem_sw(PERIPHERALS + 32'h14, 32'hFFFF_FFFF);
 
       debug_write(`DBG_CTRL_REG, 32'h0000_0000); // RESUME, but NO Single Step
 
       // clear buffer
-      debug_mem_sw(`EVENT_UNIT_BASE_ADDR + 32'h14, 32'h0000_0000);
+      debug_mem_sw(PERIPHERALS + 32'h14, 32'h0000_0000);
     end
   endtask
 
@@ -2125,7 +2125,7 @@
       end
 
       // wake-up core
-      debug_mem_sw(`EVENT_UNIT_BASE_ADDR + 32'h14, 32'hFFFF_FFFF);
+      debug_mem_sw(PERIPHERALS + 32'h14, 32'hFFFF_FFFF);
 
       debug_resume();
 
@@ -2149,7 +2149,7 @@
         dbg_tb_errors++;
       end
 
-      debug_mem_sw(`EVENT_UNIT_BASE_ADDR + 32'h14, 32'hFFFF_FFFF);
+      debug_mem_sw(PERIPHERALS + 32'h14, 32'hFFFF_FFFF);
 
       debug_resume();
     end

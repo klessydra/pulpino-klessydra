@@ -3,9 +3,10 @@ __DYNAMIC  =  0;
 
 MEMORY
 {
-    rom         : ORIGIN = 0x00020000, LENGTH = 0x2000
-    stack       : ORIGIN = 0x0F000000, LENGTH = 0x1000000
+    rom         : ORIGIN = 0x00020000, LENGTH =                                      0x2000
+    stack       : ORIGIN = 0x10000000, LENGTH = 0xC0000
 }
+
 
 /* Stack information variables */
 _min_stack      = 0x1000;   /* 4K - minimum stack space to reserve */

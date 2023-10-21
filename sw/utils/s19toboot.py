@@ -43,15 +43,15 @@ import math
 import os
 
 
-if(len(sys.argv) < 2):
+if(len(sys.argv) < 4):
     print "Usage s19toboot.py FILENAME"
     quit()
 
 
 rom_size      = 548 # in words (32 bit)
-rom_start     = 0x00020000
+rom_start     = int(sys.argv[3],16)
 rom_end       = rom_start + rom_size * 4 - 1
-
+print("Boot python file -> rom_start: ", rom_start)
 
 ###############################################################################
 # Function to dump single bytes of a string to a file

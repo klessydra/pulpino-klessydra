@@ -32,6 +32,7 @@ module pulpino_top
     parameter RISCY_RV32F           = 0,
     parameter ZERO_RV32M            = 1,
     parameter ZERO_RV32E            = 0,
+    
 	//Klessydra Parameters
   parameter KLESS_CONTEXT_SWITCH         = 1,
 	parameter KLESS_THREAD_POOL_SIZE		   = 3,
@@ -56,7 +57,15 @@ module pulpino_top
 	parameter KLESS_MHPMCOUNTER_EN			   = 1,
 	parameter KLESS_count_all				       = 1,
 	parameter KLESS_debug_en				       = 1,
-  parameter KLESS_tracer_en              = 0  
+  parameter KLESS_tracer_en              = 0,
+  parameter INSTRRAM_SIZE                =  131072,     
+  parameter INSTRRAM_ORG                 = 'h000000,
+  parameter DATARAM_SIZE                 =  267386880,
+  parameter DATARAM_ORG                  = 'h00100000,
+  parameter ROM_SIZE                     =  8192,
+  parameter ROM_ORG                      = 'h00020000,
+  parameter PERIPHERALS                  =  32'h1000_0000
+
   )
   (
     // Clock and Reset
@@ -128,7 +137,11 @@ module pulpino_top
     output logic [31:0] [5:0] pad_cfg_o,
     output logic       [31:0] pad_mux_o
   );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 49a60be (Add files via upload)
   logic        clk_int;
 
   logic        fetch_enable_int;
@@ -220,10 +233,15 @@ module pulpino_top
     .ZERO_RV32M           (  ZERO_RV32M          ),
     .ZERO_RV32E           (  ZERO_RV32E          ),
 	//Klessydra Parameters
+<<<<<<< HEAD
 	.KLESS_CONTEXT_SWITCH          (KLESS_CONTEXT_SWITCH),
    	.KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
     .KLESS_LUTRAM_RF               (KLESS_LUTRAM_RF),
     .KLESS_LATCH_RF                (KLESS_LATCH_RF),
+=======
+   	.KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
+    .KLESS_LUTRAM_RF               (KLESS_LUTRAM_RF),
+>>>>>>> 49a60be (Add files via upload)
    	.KLESS_RV32E                   (KLESS_RV32E),
    	.KLESS_RV32M                   (KLESS_RV32M),
     .KLESS_superscalar_exec_en     (KLESS_superscalar_exec_en),
@@ -242,7 +260,17 @@ module pulpino_top
    	.KLESS_MINSTRET_EN             (KLESS_MINSTRET_EN),
    	.KLESS_MHPMCOUNTER_EN          (KLESS_MHPMCOUNTER_EN),
    	.KLESS_count_all               (KLESS_count_all),
+<<<<<<< HEAD
    	.KLESS_debug_en                (KLESS_debug_en)
+=======
+   	.KLESS_debug_en                (KLESS_debug_en),
+    .INSTRRAM_SIZE                 (INSTRRAM_SIZE),
+    .INSTRRAM_ORG                  (INSTRRAM_ORG ),
+    .DATARAM_SIZE                  (DATARAM_SIZE ),
+    .DATARAM_ORG                   (DATARAM_ORG  ),
+    .ROM_SIZE                      (ROM_SIZE     ),
+    .ROM_ORG                       (ROM_ORG      )
+>>>>>>> 49a60be (Add files via upload)
   )
   core_region_i
   (
@@ -278,7 +306,12 @@ module pulpino_top
     .AXI_DATA_WIDTH      ( `AXI_DATA_WIDTH      ),
     .AXI_SLAVE_ID_WIDTH  ( `AXI_ID_SLAVE_WIDTH  ),
     .AXI_MASTER_ID_WIDTH ( `AXI_ID_MASTER_WIDTH ),
+<<<<<<< HEAD
     .AXI_USER_WIDTH      ( `AXI_USER_WIDTH      )
+=======
+    .AXI_USER_WIDTH      ( `AXI_USER_WIDTH      ),
+    .PERIPHERALS         ( PERIPHERALS         )
+>>>>>>> 49a60be (Add files via upload)
   )
   peripherals_i
   (

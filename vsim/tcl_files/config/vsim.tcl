@@ -90,7 +90,14 @@ set cmd "vsim -quiet $TB \
   -gKLESS_count_all=$env(KLESS_count_all) \
   -gKLESS_debug_en=$env(KLESS_debug_en) \
   -gKLESS_tracer_en=$env(KLESS_tracer_en) \
-  -t ps \
+  -gINSTRRAM_SIZE=$env(INSTRRAM_SIZE) \
+  -gINSTRRAM_ORG=$env(INSTRRAM_ORG) \
+  -gGLOBALRAM_SIZE=$env(GLOBALRAM_SIZE) \
+  -gGLOBALRAM_ORG=$env(GLOBALRAM_ORG) \
+  -gROM_SIZE=$env(ROM_SIZE) \
+  -gROM_ORG=$env(ROM_ORG) \
+   +define+PERIPHERALS_D=$env(PERIPHERALS) \
+   -t ps \
   -voptargs=\"+acc -suppress 2103\" \
   $VSIM_FLAGS"
 }

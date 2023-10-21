@@ -66,6 +66,16 @@ module tb;
   parameter KLESS_count_all				       = 1;
   parameter KLESS_debug_en				       = 1;
   parameter KLESS_tracer_en              = 0;
+  parameter INSTRRAM_SIZE          =  131072;       
+  parameter INSTRRAM_ORG           = 'h000000;
+  parameter STACKRAM_SIZE          =  131072;
+  parameter GLOBALRAM_SIZE         =  267386880;
+  parameter GLOBALRAM_ORG          = 'h00100000;
+  parameter DATARAM_SIZE           =  GLOBALRAM_SIZE + STACKRAM_SIZE;
+  parameter DATARAM_ORG            = 'h00100000;
+  parameter ROM_SIZE               =  8192;
+  parameter ROM_ORG                = 'h00020000; 
+  parameter PERIPHERALS            = 'h1000000;
 
   int           exit_status = `EXIT_ERROR; // modelsim exit code, will be overwritten when successful
 
@@ -191,7 +201,12 @@ module tb;
    	.KLESS_MINSTRET_EN             (KLESS_MINSTRET_EN),
    	.KLESS_MHPMCOUNTER_EN          (KLESS_MHPMCOUNTER_EN),
    	.KLESS_count_all               (KLESS_count_all),
-   	.KLESS_debug_en                (KLESS_debug_en)
+   	.KLESS_debug_en                (KLESS_debug_en),
+    .INSTRRAM_SIZE                 (INSTRRAM_SIZE),
+    .INSTRRAM_ORG                  (INSTRRAM_ORG ),
+    .DATARAM_SIZE                  (DATARAM_SIZE ),
+    .DATARAM_ORG                   (DATARAM_ORG  ),
+    .ROM_SIZE                      (ROM_SIZE     )
    )
   top_i
   (

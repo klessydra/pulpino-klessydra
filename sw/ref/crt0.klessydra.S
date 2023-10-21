@@ -45,9 +45,9 @@ reset:
 	csrr tp, k_mhartid;        #load mhartID value's in thread pointer tp 
 	andi tp,tp,0x07;           #estraggo il valore del core nel cluster (contenuto nei 4 bit meno significativi)
 	li t3,0;                   #counter and coreID
-	li t4,0x0F000000;          #load in t4 sp value
+	la t4, _stack_start;        #load in t4 sp value
 	li t5,16;                  #max coreID number
-	li t6,-thread_stack_size;  #stack size for each thread
+	li t6,-HART_STACK_SIZE;  #stack size for each thread
 
 init_sp_loop:
 	bne tp,t3,not_assigned_sp;   #compare coreID with counter if they are not equal take the branch
@@ -59,7 +59,7 @@ not_assigned_sp:
 	bne t3,t5,init_sp_loop;	#if t3 isn't equal to 16 loop again else call main
 
 end_sp_loop:
-	mv gp,t4;			#initialize global pointer
+	la gp,GLOBALRAM_ORG;			#initialize global pointer
 	
 _start:
   .global _start

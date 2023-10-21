@@ -20,7 +20,8 @@ module peripherals
     parameter AXI_USER_WIDTH       = 6,
     parameter AXI_SLAVE_ID_WIDTH   = 6,
     parameter AXI_MASTER_ID_WIDTH  = 6,
-    parameter ROM_START_ADDR       = 32'h8000
+    parameter ROM_START_ADDR       = 32'h8000,
+    parameter PERIPHERALS          = 32'h1000_0000
   )
   (
     // Clock and Reset
@@ -210,7 +211,12 @@ module peripherals
   periph_bus_wrap
   #(
      .APB_ADDR_WIDTH( APB_ADDR_WIDTH ),
+<<<<<<< HEAD
      .APB_DATA_WIDTH( 32             )
+=======
+     .APB_DATA_WIDTH( 32             ),
+     .PERIPHERALS   ( PERIPHERALS    )
+>>>>>>> 49a60be (Add files via upload)
   )
   periph_bus_i
   (

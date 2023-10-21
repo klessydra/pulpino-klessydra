@@ -118,7 +118,14 @@ else()
 endif()
 
 set(COREMARK_DEFS "${ITERATIONS}")
+<<<<<<< HEAD
 set(KLESS_DEFINES "${TPS}" "${VSIZE}" "${TIME}" "${A_ORDER}" "${B_ORDER}" "${KLESS_SPM_A}" "${KLESS_SPM_B}" "${KLESS_SPM_C}" "${KLESS_SPM_D}")
+=======
+set(KLESS_DEFINES "${TPS}" "${NUMOFELEMENTS}" "${TIME}" "${A_ORDER}" "${B_ORDER}" "${KLESS_SPM_A}" "${KLESS_SPM_B}" "${KLESS_SPM_C}" "${KLESS_SPM_D}" 
+                  "-DROM_SIZE=${ROM_SIZE}" "-DROM_ORG=${ROM_ORG}" 
+                  "-DGLOBALRAM_SIZE=${GLOBALRAM_SIZE}" "-DGLOBALRAM_ORG=${GLOBALRAM_ORG}"
+                  "-DINSTRRAM_SIZE=${INSTRRAM_SIZE}" "-DINSTRRAM_ORG=${INSTRRAM_ORG}" "-DHART_STACK_SIZE=${HART_STACK_SIZE}" "-DPULPINO_BASE_ADDR=${PERIPHERALS}")
+>>>>>>> 49a60be (Add files via upload)
 
 set(CMAKE_ASM_COMPILER "${CMAKE_C_COMPILER}")
 set(CMAKE_ASM_FLAGS    "${CMAKE_C_FLAGS}")
@@ -145,7 +152,10 @@ set(VSIM "vsim" CACHE FILEPATH "Path to the vsim executable")
  include_directories(libs/klessydra_lib/general_libs/inc)
     if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13})
    include_directories(libs/klessydra_lib/dsp_libs/inc)
+<<<<<<< HEAD
    include_directories(libs/klessydra_lib/vgg16_libs/inc)
+=======
+>>>>>>> 49a60be (Add files via upload)
    include_directories(libs/klessydra_lib/cb_libs/inc)
  endif()
    include_directories(libs/klessydra_lib/dsp_libs/inc) 
@@ -243,7 +253,10 @@ add_subdirectory(libs/klessydra_lib/general_libs)
 
 if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13})
   add_subdirectory(libs/klessydra_lib/dsp_libs)
+<<<<<<< HEAD
   add_subdirectory(libs/klessydra_lib/vgg16_libs)
+=======
+>>>>>>> 49a60be (Add files via upload)
   add_subdirectory(libs/klessydra_lib/cb_libs)
 endif()
   

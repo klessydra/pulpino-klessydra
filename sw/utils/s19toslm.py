@@ -103,23 +103,31 @@ def bytes_to_words(byte_dict, word_dict):
 ###############################################################################
 # Start of file
 ###############################################################################
-if(len(sys.argv) < 2):
-    print "Usage s19toslm.py FILENAME"
+if(len(sys.argv) < 5):
+    print "Usage s19toslm.py FILENAME, INSTRRAM_SIZE, INSTTRAM_ORIGIN, DATARAM_SIZE, DATARAM_ORIGIN, STACKSIZE"
     quit()
-
+print("argument 1:", sys.argv[1]);
+print("argument 2:", sys.argv[2]);
+print("argument 3:", sys.argv[3]);
+print("argument 4:", sys.argv[4]);
+print("argument 5:", sys.argv[5]);
+print("argument 6:", sys.argv[6]);
 
 l2_banks     = 1
-l2_bank_size = 32768 # in words (32 bit)
-l2_start     = 0x00000000
+l2_bank_size = int(sys.argv[2])/4; # in words (32 bit)
+l2_start     = int(sys.argv[3],16);
+
 l2_end       = l2_start + l2_banks * l2_bank_size * 4 - 1
 
 tcdm_banks     = 1
-#tcdm_bank_size = 65536 # in words (32 bit)
-tcdm_bank_size = 267386880/4
-tcdm_start     = 0x00100000
+tcdm_bank_size = (int(sys.argv[4])+int(sys.argv[6],16))/4
+tcdm_start     = int(sys.argv[5],16)
 tcdm_end       = tcdm_start + tcdm_banks * tcdm_bank_size * 4 - 1
 tcdm_bank_bits = int(math.log(tcdm_banks, 2))
-
+print("l2_bank_size:", l2_bank_size);
+print("l2_start:", l2_start);
+print("tcdm_bank_size:", tcdm_bank_size);
+print("tcdm_start:", tcdm_start);
 
 ###############################################################################
 # Parse s19 file

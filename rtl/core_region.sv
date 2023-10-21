@@ -19,9 +19,7 @@ module core_region
     parameter AXI_ID_MASTER_WIDTH  = 10,
     parameter AXI_ID_SLAVE_WIDTH   = 10,
     parameter AXI_USER_WIDTH       = 0,
-    
-    
-    //parameter DATA_RAM_SIZE      = 262144, // in bytes
+   
     parameter DATA_RAM_SIZE        = 267386880,
     
     
@@ -64,7 +62,18 @@ module core_region
 	parameter KLESS_MHPMCOUNTER_EN         = 1,
 	parameter KLESS_count_all	             = 1,
 	parameter KLESS_debug_en               = 1,
+<<<<<<< HEAD
   parameter KLESS_tracer_en              = 0
+=======
+  parameter KLESS_tracer_en              = 0,
+  parameter INSTRRAM_SIZE          =  131072,     
+  parameter INSTRRAM_ORG           = 'h000000,
+  parameter DATARAM_SIZE           =  267386880,
+  parameter DATARAM_ORG            = 'h00100000,
+  parameter ROM_SIZE               =  548,
+  parameter ROM_ORG                = 'h00020000
+
+>>>>>>> 49a60be (Add files via upload)
   )
 (
     // Clock and Reset
@@ -92,8 +101,13 @@ module core_region
     output logic        tdo_o
   );
 
+<<<<<<< HEAD
   localparam INSTR_ADDR_WIDTH = $clog2(INSTR_RAM_SIZE)+1; // to make space for the boot rom
   localparam DATA_ADDR_WIDTH  = $clog2(DATA_RAM_SIZE);
+=======
+  localparam INSTR_ADDR_WIDTH = $clog2(INSTRRAM_SIZE)+1; // to make space for the boot rom
+  localparam DATA_ADDR_WIDTH  = $clog2(DATARAM_SIZE);
+>>>>>>> 49a60be (Add files via upload)
 
   localparam AXI_B_WIDTH      = $clog2(AXI_DATA_WIDTH/8); // AXI "Byte" width
 
@@ -1057,7 +1071,11 @@ module core_region
   instr_ram_wrap
   #(
     .USE_KLESSYDRA_NETLIST ( USE_KLESSYDRA_NETLIST ), 
+<<<<<<< HEAD
     .RAM_SIZE   ( INSTR_RAM_SIZE ),
+=======
+    .RAM_SIZE   ( INSTRRAM_SIZE ),
+>>>>>>> 49a60be (Add files via upload)
     .DATA_WIDTH ( AXI_DATA_WIDTH )
   )
   instr_mem
@@ -1179,7 +1197,11 @@ end
 else begin : mem_gen
   sp_ram_wrap
   #(
+<<<<<<< HEAD
     .RAM_SIZE   ( DATA_RAM_SIZE  ),
+=======
+    .RAM_SIZE   ( DATARAM_SIZE  ),
+>>>>>>> 49a60be (Add files via upload)
     .DATA_WIDTH ( AXI_DATA_WIDTH )
   )
   data_mem

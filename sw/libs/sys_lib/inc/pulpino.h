@@ -25,7 +25,11 @@
 #ifndef PULPINO_H
 #define PULPINO_H
 
-#define PULPINO_BASE_ADDR             0x10000000
+#include "../../klessydra_lib/general_libs/inc/klessydra_defs.h"
+
+#ifndef PULPINO_BASE_ADDR
+    #define PULPINO_BASE_ADDR 0x10000000
+#endif
 
 /** SOC PERIPHERALS */
 #define SOC_PERIPHERALS_BASE_ADDR     ( PULPINO_BASE_ADDR + 0xA100000 )
@@ -46,14 +50,14 @@
 #define STREAM_BASE_ADDR              ( STDOUT_BASE_ADDR + 0x3000 )
 
 /** Instruction RAM */
-#define INSTR_RAM_BASE_ADDR           ( 0x00       )
-#define INSTR_RAM_START_ADDR          ( 0x80       )
+#define INSTR_RAM_BASE_ADDR           ( INSTRRAM_ORG )
+#define INSTR_RAM_START_ADDR          ( INSTRRAM_ORG + 0x80 )
 
 /** ROM */
-#define ROM_BASE_ADDR                 ( 0x8000     )
+#define ROM_BASE_ADDR                 ( ROM_ORG    )
 
 /** Data RAM */
-#define DATA_RAM_BASE_ADDR            ( 0x00100000 )
+#define DATA_RAM_BASE_ADDR            ( GLOBALRAM_ORG )
 
 /** Registers and pointers */
 #define REGP(x) ((volatile unsigned int*)(x))
