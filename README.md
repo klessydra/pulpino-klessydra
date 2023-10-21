@@ -210,6 +210,7 @@ the status of the currently supported libraries.
 Automatic change of the memory map in the Klessydra RISC-V processor. This repository contains all the files to patch. 
 
 # Klessydra_memory_changes
+# Klessydra_Automatic_memory_map_change
 **Status:** _Under Test_
 
 
