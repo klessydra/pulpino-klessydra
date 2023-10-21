@@ -256,7 +256,8 @@ Klessydra_memory_changes
             └── vsim.tcl
 ```
 ** DESCRIPTION **
-The cmake_configure.klessydra-m.gcc.sh includes the following new variables:
+
+The cmake_configure.klessydra-m.gcc.sh includes the following new variables to modify the Klessydra processor's memory map, specifying each region's starting address and size.
 -    INSTRRAM_SIZE
 -    INSTRRAM_ORG
 -    GLOBALRAM_SIZE
@@ -265,21 +266,13 @@ The cmake_configure.klessydra-m.gcc.sh includes the following new variables:
 -    ROM_ORG
 -    HART_STACK_SIZE
 -    PERIPHERALS
-To modify the memory map of klessydra specifying each region's starting address and size.
-In fact, thanks to the new updates, all the files are parametric.
-The specified information is automatically propagated in the hardware and software libraries, allowing for an easy and fast memory reconfiguration.
+
+This is possible since all the updated files have been made parametric.
+The information specified in the cmake is automatically propagated in the hardware and software libraries, allowing for an easy and fast memory reconfiguration.
 In the following a brief explanation of how the variables are propagated from the cmake down to the specific files is provided both by the means of text and a graphic diagram.
-For the hardware files: the variables specified in the CMAKECONFIGURE are passed to the CMakeSim.txt, then to the vsim.tcl, tb.sv, 
+For the hardware files: the variables specified in the CMAKECONFIGURE are passed to the CMakeSim.txt, that pass them as arguments to the python files (s19toboot.py and s19toslm.py) and propagates them to the vsim.tcl, tb.sv, pulpino_top.sv, core_region.sv & peripherals.sv, sp_data_ram.sv & instr_ram.sv & apb_bus.sv, in order.
+For the software libraries: the variables specified in the CMAKECONFIGURE are passed to the CMakeLists.txt, that set them as defines for the following libraries
+![image](https://github.com/MarcoAngioli/Klessydra_memory_changes/assets/104903225/664f813e-b5df-4122-bcb6-217174b2382d)
 
 
-
-
-
-   
-**TODO:**
-- [] RTL-Program_Counter_unit.vhd	-> /ips/Morph/klessydra-m/RTL-Program_Counter_unit.vhd	421, 425
-
-
-  Actual Version:
-  ![image](https://github.com/MarcoAngioli/Klessydra_memory_changes/assets/104903225/d11b8382-9834-4885-a405-23a3be95300f)
 
