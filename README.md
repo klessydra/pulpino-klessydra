@@ -228,6 +228,7 @@ All updated files have been made parametric, allowing easy and fast memory recon
 
 The information specified in the cmake is automatically propagated in the hardware and software libraries, allowing for an easy and fast memory reconfiguration.
 In the following a brief explanation of how the variables are propagated from the cmake down to the specific files is provided both by the means of text and a graphic diagram.
+
 For the hardware files, the variables specified in the CMakeConfigure are passed through the following sequence: CMakeSim.txt, python files (s19toboot.py and s19toslm.py) &  vsim.tcl, tb.sv, pulpino_top.sv, core_region.sv & peripherals.sv, sp_data_ram.sv & instr_ram.sv & apb_bus.sv, in order.
 
 In the case of software libraries, the variables specified in the CMAKECONFIGURE are passed to the CMakeLists.txt, that set them as defines for the following libraries
