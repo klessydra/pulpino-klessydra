@@ -19,11 +19,6 @@ module core_region
     parameter AXI_ID_MASTER_WIDTH  = 10,
     parameter AXI_ID_SLAVE_WIDTH   = 10,
     parameter AXI_USER_WIDTH       = 0,
-   
-    parameter DATA_RAM_SIZE        = 267386880,
-    
-    
-    parameter INSTR_RAM_SIZE        = 131072, // in bytes
     parameter USE_KLESSYDRA_T0_2TH  = 0,
     parameter USE_KLESSYDRA_T0_3TH  = 0,
     parameter USE_KLESSYDRA_T1_3TH  = 0,
