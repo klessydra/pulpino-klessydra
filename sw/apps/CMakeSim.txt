@@ -26,6 +26,21 @@ MESSAGE(STATUS "${LightMagenta}ZERO_RV32M${ColourReset} = ${ZERO_RV32M}")
 MESSAGE(STATUS "${LightMagenta}ZERO_RV32E${ColourReset} = ${ZERO_RV32E}")
 MESSAGE(STATUS "${LightMagenta}PL_NETLIST${ColourReset} = ${PL_NETLIST}")
 MESSAGE("")
+MESSAGE("*************************")
+MESSAGE("** MEMORY CONFIGS **")
+MESSAGE("*************************")
+MESSAGE(STATUS "INSTRRAM_SIZE= ${INSTRRAM_SIZE}")
+MESSAGE(STATUS "INSTRRAM_ORG= ${INSTRRAM_ORG}")
+MESSAGE(STATUS "GLOBALRAM_SIZE= ${GLOBALRAM_SIZE}")
+MESSAGE(STATUS "GLOBALRAM_ORG= ${GLOBALRAM_ORG}")
+MESSAGE(STATUS "ROM_SIZE= ${ROM_SIZE}")
+MESSAGE(STATUS "ROM_ORG= ${ROM_ORG}")
+MESSAGE(STATUS "HART_STACK_SIZE= ${HART_STACK_SIZE}")
+MESSAGE(STATUS "STACK_SIZE= ${STACK_SIZE}")
+MESSAGE(STATUS "STACK_ORG= ${STACK_ORG}")
+MESSAGE(STATUS "STACK_END= ${STACK_END}")
+MESSAGE(STATUS "PERIPHERALS= ${PERIPHERALS}")
+MESSAGE("")
 MESSAGE("*****************************")
 MESSAGE("** KLESSYDRA CORES CONFIGS **")
 MESSAGE("*****************************")
@@ -93,10 +108,7 @@ macro(add_sim_targets NAME)
   KLESS_CONTEXT_SWITCH=${KLESS_CONTEXT_SWITCH} \
   KLESS_THREAD_POOL_SIZE=${KLESS_THREAD_POOL_SIZE} \
   KLESS_LUTRAM_RF=${KLESS_LUTRAM_RF} \
-<<<<<<< HEAD
   KLESS_LATCH_RF=${KLESS_LATCH_RF} \
-=======
->>>>>>> 49a60be (Add files via upload)
   KLESS_RV32E=${KLESS_RV32E} \
   KLESS_RV32M=${KLESS_RV32M} \
   KLESS_superscalar_exec_en=${KLESS_superscalar_exec_en} \
@@ -117,10 +129,6 @@ macro(add_sim_targets NAME)
   KLESS_count_all=${KLESS_count_all} \
   KLESS_debug_en=${KLESS_debug_en} \
   KLESS_tracer_en=${KLESS_tracer_en} \
-<<<<<<< HEAD
-  TB_TEST=\"$<TARGET_PROPERTY:${NAME}.elf,TB_TEST>\"")
-
-=======
   INSTRRAM_SIZE=${INSTRRAM_SIZE} \
   INSTRRAM_ORG=${INSTRRAM_ORG} \
   GLOBALRAM_SIZE=${GLOBALRAM_SIZE} \
@@ -129,11 +137,11 @@ macro(add_sim_targets NAME)
   ROM_ORG=${ROM_ORG} \
   STACK_SIZE=${STACK_SIZE} \
   STACK_ORG=${STACK_ORG} \
+  STACK_END=${STACK_END} \
   PERIPHERALS=${PERIPHERALS} \
   TB_TEST=\"$<TARGET_PROPERTY:${NAME}.elf,TB_TEST>\"")
 
 
->>>>>>> 49a60be (Add files via upload)
   # generate s19 file
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${SUBDIR}/${NAME}.s19
     COMMAND ${CMAKE_OBJCOPY} --srec-len 1 --output-target=srec $<TARGET_FILE:${NAME}.elf> ${NAME}.s19
@@ -177,11 +185,7 @@ macro(add_sim_targets NAME)
 
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${SUBDIR}/slm_files/)
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${SUBDIR}/slm_files/l2_ram.slm
-<<<<<<< HEAD
-    COMMAND ${UTILS_DIR}/s19toslm.py ../${NAME}.s19
-=======
     COMMAND ${UTILS_DIR}/s19toslm.py ../${NAME}.s19 ${INSTRRAM_SIZE} ${INSTRRAM_ORG} ${GLOBALRAM_SIZE} ${GLOBALRAM_ORG} ${STACK_SIZE}
->>>>>>> 49a60be (Add files via upload)
     COMMAND ${CMAKE_COMMAND} -E touch l2_ram.slm
     WORKING_DIRECTORY ./${SUBDIR}/slm_files/
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${SUBDIR}/${NAME}.s19)
