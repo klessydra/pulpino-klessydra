@@ -37,13 +37,13 @@ module tb;
   parameter  USE_KLESSYDRA_OOO     = 0;
   parameter  USE_KLESSYDRA_F0_3TH  = 0;
   parameter  USE_KLESSYDRA_FT13    = 0;
-  parameter	 USE_KLESSYDRA_NETLIST = 0;
+  parameter  USE_KLESSYDRA_NETLIST = 0;
   parameter  RISCY_RV32F    = 0;
   parameter  ZERO_RV32M     = 1;
   parameter  ZERO_RV32E     = 0;
   //Klessydra Parameters
   parameter KLESS_CONTEXT_SWITCH         = 1;
-  parameter KLESS_THREAD_POOL_SIZE		   = 3;
+  parameter KLESS_THREAD_POOL_SIZE       = 3;
   parameter KLESS_LUTRAM_RF              = 1;
   parameter KLESS_LATCH_RF               = 0;
   parameter KLESS_RV32E					         = 0;
@@ -54,24 +54,24 @@ module tb;
   parameter KLESS_branch_predict_en      = 1;
   parameter KLESS_btb_en                 = 0;
   parameter KLESS_btb_len                = 0;
-  parameter KLESS_accl_en				         = 1;
-  parameter KLESS_replicate_accl_en	     = 1;
+  parameter KLESS_accl_en                = 1;
+  parameter KLESS_replicate_accl_en      = 1;
   parameter KLESS_multithreaded_accl_en  = 0;
-  parameter KLESS_SPM_NUM				         = 3;
-  parameter KLESS_Addr_Width			       = 12;
-  parameter KLESS_SIMD					         = 4;
-  parameter KLESS_MCYCLE_EN			         = 1;
-  parameter KLESS_MINSTRET_EN			       = 1;
-  parameter KLESS_MHPMCOUNTER_EN		     = 1;
-  parameter KLESS_count_all				       = 1;
-  parameter KLESS_debug_en				       = 1;
+  parameter KLESS_SPM_NUM                = 3;
+  parameter KLESS_Addr_Width             = 12;
+  parameter KLESS_SIMD                   = 4;
+  parameter KLESS_MCYCLE_EN              = 1;
+  parameter KLESS_MINSTRET_EN            = 1;
+  parameter KLESS_MHPMCOUNTER_EN         = 1;
+  parameter KLESS_count_all              = 1;
+  parameter KLESS_debug_en               = 1;
   parameter KLESS_tracer_en              = 0;
   parameter INSTRRAM_SIZE          =  131072;       
   parameter INSTRRAM_ORG           = 'h000000;
   parameter STACKRAM_SIZE          =  131072;
   parameter GLOBALRAM_SIZE         =  267386880;
   parameter GLOBALRAM_ORG          = 'h00100000;
-  parameter DATARAM_SIZE           =  GLOBALRAM_SIZE + STACKRAM_SIZE;
+  parameter DATARAM_SIZE           =  GLOBALRAM_SIZE;
   parameter DATARAM_ORG            = 'h00100000;
   parameter ROM_SIZE               =  8192;
   parameter ROM_ORG                = 'h00020000; 
@@ -175,12 +175,12 @@ module tb;
     .USE_KLESSYDRA_OOO       ( USE_KLESSYDRA_OOO    ),
     .USE_KLESSYDRA_F0_3TH    ( USE_KLESSYDRA_F0_3TH ),
     .USE_KLESSYDRA_FT13      ( USE_KLESSYDRA_FT13   ),
-	  .USE_KLESSYDRA_NETLIST   ( USE_KLESSYDRA_NETLIST ),
+    .USE_KLESSYDRA_NETLIST   ( USE_KLESSYDRA_NETLIST ),
     .RISCY_RV32F             ( RISCY_RV32F    ),
     .ZERO_RV32M              ( ZERO_RV32M     ),
     .ZERO_RV32E              ( ZERO_RV32E     ),
-	//Klessydra Parameters
-   	.KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
+  //Klessydra Parameters
+    .KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
     .KLESS_LUTRAM_RF               (KLESS_LUTRAM_RF),
     .KLESS_LATCH_RF                (KLESS_LATCH_RF),
    	.KLESS_RV32E                   (KLESS_RV32E),
@@ -191,17 +191,17 @@ module tb;
     .KLESS_branch_predict_en       (KLESS_branch_predict_en),
     .KLESS_btb_en                  (KLESS_btb_en),
     .KLESS_btb_len                 (KLESS_btb_len),
-   	.KLESS_accl_en                 (KLESS_accl_en),
-   	.KLESS_replicate_accl_en       (KLESS_replicate_accl_en),
-   	.KLESS_multithreaded_accl_en   (KLESS_multithreaded_accl_en),
-   	.KLESS_SPM_NUM                 (KLESS_SPM_NUM),
-   	.KLESS_Addr_Width              (KLESS_Addr_Width),
-   	.KLESS_SIMD                    (KLESS_SIMD),
-   	.KLESS_MCYCLE_EN               (KLESS_MCYCLE_EN),
-   	.KLESS_MINSTRET_EN             (KLESS_MINSTRET_EN),
-   	.KLESS_MHPMCOUNTER_EN          (KLESS_MHPMCOUNTER_EN),
-   	.KLESS_count_all               (KLESS_count_all),
-   	.KLESS_debug_en                (KLESS_debug_en),
+    .KLESS_accl_en                 (KLESS_accl_en),
+    .KLESS_replicate_accl_en       (KLESS_replicate_accl_en),
+    .KLESS_multithreaded_accl_en   (KLESS_multithreaded_accl_en),
+    .KLESS_SPM_NUM                 (KLESS_SPM_NUM),
+    .KLESS_Addr_Width              (KLESS_Addr_Width),
+    .KLESS_SIMD                    (KLESS_SIMD),
+    .KLESS_MCYCLE_EN               (KLESS_MCYCLE_EN),
+    .KLESS_MINSTRET_EN             (KLESS_MINSTRET_EN),
+    .KLESS_MHPMCOUNTER_EN          (KLESS_MHPMCOUNTER_EN),
+    .KLESS_count_all               (KLESS_count_all),
+    .KLESS_debug_en                (KLESS_debug_en),
     .INSTRRAM_SIZE                 (INSTRRAM_SIZE),
     .INSTRRAM_ORG                  (INSTRRAM_ORG ),
     .DATARAM_SIZE                  (DATARAM_SIZE ),
