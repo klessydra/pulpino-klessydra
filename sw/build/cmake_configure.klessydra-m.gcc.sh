@@ -33,7 +33,6 @@ then
 	#  -- ██║  ██╗███████╗███████╗███████║███████║   ██║   ██████╔╝██║  ██║██║  ██║    ╚██████╗╚██████╔╝██║  ██║███████╗███████║  --
 	#  -- ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝  --
     #  -----------------------------------------------------------------------------------------------------------------------------
-
 	USE_KLESSYDRA=1 # Set this to one if you are using a klessydra core (uses the klessydra startup file)
 	USE_KLESSYDRA_T0_2TH=0 # if you are using klessydra-t0-2th (The three pipeline version of klessydra t0), set this to 1
 	USE_KLESSYDRA_T0_3TH=0 # if you are using klessydra-t0-3th (The four pipeline version of klessydra t0), set this to 1
@@ -61,7 +60,7 @@ then
 	KLESS_RV32E=0                   # Regfile size, Can be set to 32 for RV32E being 0 else 16 for RV32E being set to 1, also chnges the RISCV compiler and Klessydra startup file accordingly
 	KLESS_RV32M=1                   # Enable the M-extension of the risc-v instruction set
 	KLESS_superscalar_exec_en=1		# Enables superscalar execution when set to 1, else the stall of the pipeline will depend on tha latency of the instruction
-	KLESS_morph_en=1                # Enables hardware metamorphisis, that lets the IMT processor morph into an in-order execution processor to avoid stalling
+	KLESS_morph_en=1        # Enables hardware metamorphisis, that lets the IMT processor morph into an in-order execution processor to avoid stalling
 	KLESS_fetch_stage_en=0          # Enables the an additional fetch stage which handles some of the data dependency logic (needs morph_en to be set or THREAD_POOL_SIZE < THREAD_POOL_BASELINE)
 	KLESS_branch_predict_en=1       # Enables a 1-bit branch predictor (if set without btb_en), that predicts a taken branch if the offset is negative, else it preicts a positive offset
 	KLESS_btb_en=0                  # Enables the branch target buffer of size defined in 2^btb_len, to enable the btb, branch_predict_en must be set to '1'
@@ -70,7 +69,7 @@ then
 	KLESS_replicate_accl_en=1       # Set to 1 to replicate the accelerator for every thread
 	KLESS_multithreaded_accl_en=1   # Set to 1 to let the replicated accelerator share the functional units (note: replicate_accl_en must be set to '1')
 	KLESS_SPM_NUM=4                 # The number of scratchpads available "Minimum allowed is two"
-	KLESS_Addr_Width=14             # This address is for scratchpads. Setting this will make the size of the spm to be: "2^Addr_Width -1"
+	KLESS_Addr_Width=13             # This address is for scratchpads. Setting this will make the size of the spm to be: "2^Addr_Width -1"
 	#   KLESS_SPM_STRT_ADDR          std_logic_vector(31 downto 0) := x"1000_0000";  -- This is starting address of the spms, it shouldn't overlap any sections in the memory map
 	KLESS_SIMD=$D                    # Changing the SIMD, would change the number of the functional units in the dsp, and the number of banks in the spms (can be power of 2 only e.g. 1,2,4,8)
 	KLESS_MCYCLE_EN=1               # Can be set to 1 or 0 only. Setting to zero will disable MCYCLE and MCYCLEH
@@ -78,7 +77,7 @@ then
 	KLESS_MHPMCOUNTER_EN=1          # Can be set to 1 or 0 only. Setting to zero will disable all performance counters except "MCYCLE/H" and "MINSTRET/H"
 	KLESS_count_all=0               # Perfomance counters count for all the harts instead of there own hart
 	KLESS_debug_en=1                # Generates the debug unit
-	KLESS_tracer_en=1				# Generate the instruction tracer used only for debugging purposes
+	KLESS_tracer_en=0				# Generate the instruction tracer used only for debugging purposes
 
     #  -------------------------------------------------------------------------------------------------------------------------------------------------------
     #  --  ██████╗ ██╗███████╗ ██████╗██╗   ██╗     ██████╗ ██████╗ ██████╗ ███████╗███████╗    ██╗ ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ ███████╗  --
@@ -88,7 +87,6 @@ then
     #  --  ██║  ██║██║███████║╚██████╗   ██║       ╚██████╗╚██████╔╝██║  ██║███████╗███████║██╔╝   ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝███████║  --
     #  --  ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝   ╚═╝        ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝  --
     #  -------------------------------------------------------------------------------------------------------------------------------------------------------
-
 	USE_RI5CY=0 	 # Set this to one if you are using the riscy core (no hard floats)
 	USE_ZERO_RISCY=0 # if you are using zero-riscy, set this to 1
 	RISCY_RV32F=0	 # set this to 1 if you are using the Floating Point extensions for riscy only
@@ -104,14 +102,11 @@ then
     #	--  ███████║╚███╔███╔╝    ██████╔╝███████╗██║     ██║██║ ╚████║███████╗███████║  --
     #	--  ╚══════╝ ╚══╝╚══╝     ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝  --
     #	-----------------------------------------------------------------------------------
-
-
 	FM_Size=32       				 # Defines the size of the Feature Maps in the convolution tests (can only be multiples of 2, FMs > 32 are not tested)
 	Filter_Size=3   				 # Defines the size of the Filters in the convolution tests (can only be 3,5,7,9,11)
 	VSIZE=1 		 				 # Defines the vector size used in the instruction verification klessydra T13 tests
 	TIME=$(( RANDOM % 2147483647))   # Defines the time used for random generation in different tests
 	COREMARK_ITR=1					 # Defines the number of iterations ran by coremark
-
 	file=test
 
     #	-------------------------------------------------------------------------------------------
@@ -122,16 +117,39 @@ then
     #   -- ██║░╚═╝░██║███████╗██║░╚═╝░██║	██████╔╝███████╗██║░░░░░██║██║░╚███║███████╗██████╔╝ --
     #   -- ╚═╝░░░░░╚═╝╚══════╝╚═╝░░░░░╚═╝	╚═════╝░╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚══╝╚══════╝╚═════╝░ --
     #	-------------------------------------------------------------------------------------------
-    INSTRRAM_SIZE=131072
+    #INSTRRAM_SIZE=131072
+    #INSTRRAM_ORG=0x000000
+    #GLOBALRAM_SIZE=267649024
+    #GLOBALRAM_ORG=0x00100000
+    #ROM_SIZE=8192
+    #ROM_ORG=0x00050000
+    #HART_STACK_SIZE=262144
+    #STACK_SIZE=$((HART_STACK_SIZE * KLESS_THREAD_POOL_SIZE))
+    #STACK_ORG=$((GLOBALRAM_ORG + GLOBALRAM_SIZE))
+    #PERIPHERALS=0x10000000
+    INSTRRAM_SIZE=131072 #290816
     INSTRRAM_ORG=0x000000
-    GLOBALRAM_SIZE=267386880
+    GLOBALRAM_SIZE=267386880 #290816
     GLOBALRAM_ORG=0x00100000
     ROM_SIZE=8192
-    ROM_ORG=0x00020000
+    ROM_ORG=0x00050000 #0x10000004 #0x00050000
     HART_STACK_SIZE=262144
     STACK_SIZE=$((HART_STACK_SIZE * KLESS_THREAD_POOL_SIZE))
-    STACK_ORG=$((GLOBALRAM_ORG + GLOBALRAM_SIZE))
+    STACK_ORG=$((GLOBALRAM_ORG + GLOBALRAM_SIZE - STACK_SIZE))
     PERIPHERALS=0x10000000
+    STACK_END=$((GLOBALRAM_ORG + GLOBALRAM_SIZE))
+    STACK_END=$(echo "obase=16;${STACK_END}" |bc)
+    STACK_END=$(echo "0x$STACK_END")
+    #INSTRRAM_SIZE=290816
+    #INSTRRAM_ORG=0x000000
+    #GLOBALRAM_SIZE=267386880
+    #GLOBALRAM_ORG=0x00100000
+    #ROM_SIZE=8192
+    #ROM_ORG=0x00050000
+    #HART_STACK_SIZE=808277
+    #STACK_SIZE=$((HART_STACK_SIZE * KLESS_THREAD_POOL_SIZE))
+    #STACK_ORG=$((GLOBALRAM_ORG + GLOBALRAM_SIZE))
+    #PERIPHERALS=0x10000000
 
 fi
 
@@ -141,7 +159,8 @@ fi
 	LINK_BOOT=../ref/link.boot.ld
 	SPI_DEBUG=../../tb/spi_debug_test.svh
 	PROGRAM_COUNTER=../../ips/Morph/klessydra-m/RTL-Program_Counter_unit.vhd
-	
+	KLESSYDRA_DEFS=../libs/klessydra_lib/general_libs/inc/klessydra_defs.h
+
 	# Temporary Patch of RTL_PROGRAM_COUNTER.vhd (TODO: pass the value)
 	PC_NEW_VALUE=$((INSTRRAM_ORG + 0x80))
 	starting_string=$(cat $PROGRAM_COUNTER | grep "pc(h) <=" | head -2 | tail -1)
@@ -160,6 +179,7 @@ fi
 	actual_rom_size_h=$(cat $LINK_BOOT | grep -n "rom" | head -1 | cut -d ":" -f 3 | awk '{print $6}'|tr -d "[:blank:]"|awk '{print substr($0,3)}')					# ROM SIZE in hex
 	actual_globalram_size_h=$(cat $LINK_COMMON | grep -n "dataram" | head -1 | cut -d ":" -f 3 | awk '{print $6}' |tr -d "[:blank:]"|awk '{print substr($0,3)}') 	# DATA_RAM SIZE in hex
 	actual_stack_size_h=$(cat $LINK_COMMON | grep -n "stack" | head -1 | cut -d ":" -f 3 | awk '{print $6}' |tr -d "[:blank:]"|awk '{print substr($0,3)}')          # STACK SIZE in hex
+	#actual_stack_end_h=$(cat $KLESSYDRA_DEF | grep -n "STACK_START"|tail -1|cut -d "x" -f 2)          # STACK END in hex
 
 	event_value="${PERIPHERALS_ORG#0x}"
 	GLOBALRAM_SIZE_H=$(echo "obase=16;${GLOBALRAM_SIZE}" |bc)
@@ -175,7 +195,7 @@ fi
 
 	sed -i -e "s/\(rom\s*:\s*ORIGIN\s*=\s*\)0x$actual_rom_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_rom_size_h*/\1$ROM_ORG\2 0x$ROM_SIZE_H/g" $LINK_BOOT
     sed -i -e "s/\(stack\s*:\s*ORIGIN\s*=\s*\)0x$actual_stack_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_stack_size_h*/\10x$STACK_ORG_H\20x$STACK_SIZE_H/g" $LINK_BOOT   
-
+    sed -i -e "s/^#define STACK_END .*/#define STACK_END $STACK_END/"  $KLESSYDRA_DEFS
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if [ $USE_RI5CY -eq 1 ]
@@ -370,6 +390,7 @@ cmake "$PULP_GIT_DIRECTORY"/sw/ \
     -DHART_STACK_SIZE="$HART_STACK_SIZE"\
     -DSTACK_SIZE="$STACK_SIZE"\
     -DSTACK_ORG="$STACK_ORG"\
+    -DSTACK_END="$STACK_END"\
     -DPERIPHERALS="$PERIPHERALS"
     
 
