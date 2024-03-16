@@ -118,7 +118,7 @@ libexpat-dev
 		
 		c) ./update-ips.py	
 
-5.	OPTIONAL: After the update scipt is done, then you will be able to test Klessydra-m.
+5.	OPTIONAL: After the update script is done, then you will be able to test Klessydra-m.
 		-Navigate to "sw" folder inside pulpino and execute the following commands
 
 		a) mkdir build
