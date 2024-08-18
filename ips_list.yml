@@ -110,6 +110,7 @@ T13x:
 fT13x:
   commit: master
 
+<<<<<<< HEAD
 # Klessydra Primitve Blocks
 KPrim:
   commit: main
