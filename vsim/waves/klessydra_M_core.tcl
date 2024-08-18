@@ -7,10 +7,57 @@ add wave -group "Core" -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_
 add wave -group "Core" -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/LSU/*
 add wave -group "Core" -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/EXECUTE/*
 add wave -group "Core" -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/RF/*
-add wave -group "VCU"  -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/*
-add wave -group "VCU"  -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/SCI/*
 #add wave -group "SC"  -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/SCI/SC/*
+
+add wave -group "VCU" -group "All"      -radix hexadecimal -r sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/*
+
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/clk_i
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/rst_ni
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_sc_data_read
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_shifter_operand
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_shifter_operand_lat
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_shifter_operand_lat_wire
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_int_shifter_operand
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_out_shifter_results
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_cmp_operands
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_mul_operands_a
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_mul_operands_b
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_out_mul_results
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_out_cmp_results
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_accum_operands
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/ACCUM_STG/reduction_tree
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/ACCUM_STG/reduction_tree_wire
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_out_accum_results
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_adder_operands
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_in_adder_operands_lat
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_out_adder_results
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_sc_data_write_wire
+
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/ACCUM_STG/reduction_tree_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/ACCUM_STG/dsp_out_accum_results_wire
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/MVSIZE_READ
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/MVSIZE_WRITE
+
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/shifter_stage_1_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/shifter_stage_2_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/shifter_stage_3_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/adder_stage_1_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/adder_stage_2_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/adder_stage_3_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/mul_stage_1_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/mul_stage_2_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/mul_stage_3_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/cmp_stage_1_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/cmp_stage_2_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/accum_stage_1_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/dsp_out_accum_en
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/MSB_stage_1
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/MSB_stage_2
+add wave -group "VCU" -group "Datapath" -radix hexadecimal sim:/tb/top_i/core_region_i/CORE/RISCV_CORE/ACCL_generate/VCU_inst/DSP/MSB_stage_3
+
 add wave -group "LSU" -radix hexadecimal sim:tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/LSU/*
+
+add wave -group "DIV" -radix hexadecimal -R sim:tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/EXECUTE/divider_inst/*
 
 add wave -group MEM -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/clk_i
 add wave -group MEM -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/LSU/nextstate_LS
@@ -32,6 +79,7 @@ add wave -group Perf_Cnt -radix decimal     tb/top_i/core_region_i/CORE/RISCV_CO
 add wave -group Perf_Cnt -radix decimal     tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MHPMCOUNTER8
 add wave -group Perf_Cnt -radix decimal     tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MHPMCOUNTER9
 add wave -group Perf_Cnt -radix decimal     tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MHPMCOUNTER10
+add wave -group Perf_Cnt -radix decimal     tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MHPMCOUNTER22
 
 add wave -group CSR -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MTVEC
 add wave -group CSR -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/PCER
@@ -44,6 +92,17 @@ add wave -group CSR -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MO
 add wave -group CSR -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MHARTID
 add wave -group CSR -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MVTYPE
 add wave -group CSR -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/MVSIZE
+
+add wave -group KFPU -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/*
+add wave -group KFPU -group KFPU_Top -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/*
+add wave -group KFPU -group FCLASS   -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/fp_classify_inst/*
+add wave -group KFPU -group FADD     -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/fp_add_inst/*
+add wave -group KFPU -group FMUL     -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/fp_mul_inst/*
+add wave -group KFPU -group FDIV     -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/fp_div_inst/*
+add wave -group KFPU -group FSqrt    -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/fp_sqrt_inst/*
+add wave -group KFPU -group Normalze -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/fp_norm_inst/*
+add wave -group KFPU -group Round    -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/KFPU_INST/KFPU_INST/fp_round_inst/*
+
 
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/decoded_instruction_LS
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/decoded_instruction_DSP
@@ -65,6 +124,7 @@ add wave -group Debug -color Cyan    -radix hexadecimal tb/top_i/core_region_i/C
 add wave -group Debug -color Yellow  -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/PIPE/instr_rvalid_ID_int
 add wave -group Debug -color Magenta -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/PIPE/instr_rvalid_IE
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/CSR/harc_to_csr
+add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/PIPE/RF/fp_regfile
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/regfile
 #add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/regfile_bram
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/harc_IF
@@ -130,6 +190,11 @@ add wave -group RAW_Check -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_C
 add wave -group RAW_Check -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/Instr_word_buf
 add wave -group RAW_Check -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/pc_buf
 
+#add wave -group DMEM -radix hexadecimal sim:tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/mem[62652400:62652416]
+#add wave -group DMEM -radix hexadecimal sim:/tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/wdata
+#add wave -group DMEM -radix hexadecimal sim:/tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/we_i
+#add wave -group DMEM -radix hexadecimal sim:/tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/wdata_i
+#add wave -group DMEM -radix hexadecimal sim:/tb/top_i/core_region_i/mem_gen.data_mem/sp_ram_i/addr_i
 
 
 WaveRestoreCursors {0 ns}
