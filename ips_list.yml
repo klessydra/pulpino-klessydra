@@ -110,7 +110,15 @@ T13x:
 fT13x:
   commit: master
 
-# Klessydra Software Suite
+# Klessydra Primitve Blocks
+KPrim:
+  commit: main
+
+# Klessydra Primitve Blocks
+KFPU:
+  commit: main
+
+# Klessydra Software Test Suite
 Software-Test-Suite:
   commit: master
 
