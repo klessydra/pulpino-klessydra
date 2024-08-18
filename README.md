@@ -7,7 +7,7 @@
 
 This project is a merger of Pulpino and Klessydra. It is an integration of the Klessydra Cores, and software test suite and libraries inside PULPino
 
-# Klesydra Introduction
+# Klessydra Introduction
 
 Klessydra is a family of processing cores designed at the Digital System's Laboratory at the University of Sapienza in Rome. Klessydra features a whole class of different processing cores ranging from in-order execution to out-of-order execution cores, single threaded to multi-threaded, from non-fault tolerant to fault tolerant temporaly redundant or spatially redundant, and lastly from hardware static to hardware dynamic processor architectures.
 
@@ -85,7 +85,14 @@ PULPino-Klessydra uses multiple git submodules. The submodules from PULPino were
 
 1.	Install the following packeges:
 		
-		sudo apt-get install git cmake python-yaml tcsh autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
+		sudo apt install python2.7
+		sudo apt install python-pip
+		pip2 install pyyaml
+		cd $(dirname $(which python2.7))
+		sudo ln -s python2.7 python
+		sudo apt-get install git cmake tcsh autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
+
+libexpat-dev
 
 2.	Download and build the "ri5cy_gnu_toolchain" from PULP
 
@@ -111,7 +118,7 @@ PULPino-Klessydra uses multiple git submodules. The submodules from PULPino were
 		
 		c) ./update-ips.py	
 
-5.	OPTIONAL: After the update scipt is done, then you will be able to test Klessydra-m.
+5.	OPTIONAL: After the update script is done, then you will be able to test Klessydra-m.
 		-Navigate to "sw" folder inside pulpino and execute the following commands
 
 		a) mkdir build

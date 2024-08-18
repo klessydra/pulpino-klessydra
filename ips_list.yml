@@ -119,6 +119,11 @@ KFPU:
   commit: main
 
 # Klessydra Software Test Suite
+# Klessydra-dfT13x
+#dfT13x:
+#  commit: master
+
+# Klessydra Software Suite
 Software-Test-Suite:
   commit: master
 
