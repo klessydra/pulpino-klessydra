@@ -5,6 +5,7 @@ set cmd "vsim -quiet $TB \
    -vopt \
   -L pulpino_lib \
   -L simprims_ver \
+  -L unisims_ver \
   -L klessydra_functional_netlist_lib \
   $VSIM_IP_LIBS \
   +nowarnTRAN \
