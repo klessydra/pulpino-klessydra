@@ -220,6 +220,7 @@ module pulpino_top
     .ZERO_RV32M           (  ZERO_RV32M          ),
     .ZERO_RV32E           (  ZERO_RV32E          ),
 	//Klessydra Parameters
+	.KLESS_CONTEXT_SWITCH          (KLESS_CONTEXT_SWITCH),
    	.KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
     .KLESS_LUTRAM_RF               (KLESS_LUTRAM_RF),
     .KLESS_LATCH_RF                (KLESS_LATCH_RF),
