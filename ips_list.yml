@@ -80,7 +80,7 @@ fpu:
 
 # Klessydra-F03x
 F03x:
-  commit: rtl_only
+  commit: master
 
 # Klessydra-Morph
 Morph:
@@ -88,23 +88,23 @@ Morph:
 
 # Klessydra-OoO
 OoO:
-  commit: rtl_only
+  commit: master
 
 # Klessydra-S1
 S1:
-  commit: rtl_only
+  commit: master
 
 # Klessydra-T02x
 T02x:
-  commit: rtl_only
+  commit: master
 
 # Klessydra-T03x
 T03x:
-  commit: rtl_only
+  commit: master
 
 # Klessydra-T13x
 T13x:
-  commit: rtl_only
+  commit: master
 
 # Klessydra-fT13x
 fT13x:
