@@ -1,7 +1,6 @@
 *.swp
 sw/build*
 imperio
-ips_list.yml
 ips/F03x
 ips/Morph
 ips/OoO
