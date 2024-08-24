@@ -35,16 +35,16 @@ then
 	#  -- ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝  --
     #  -----------------------------------------------------------------------------------------------------------------------------
 
-	USE_KLESSYDRA=1 # Set this to one if you are using a klessydra core (uses the klessydra startup file)
-	USE_KLESSYDRA_T0_2TH=0 # if you are using klessydra-t0-2th (The three pipeline version of klessydra t0), set this to 1
-	USE_KLESSYDRA_T0_3TH=0 # if you are using klessydra-t0-3th (The four pipeline version of klessydra t0), set this to 1
-	USE_KLESSYDRA_T1_3TH=0 # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1CV
-	USE_KLESSYDRA_M=1   # if you are using klessydra-m (A hart morphing version of klessydra T1), set this to 1CV
-	USE_KLESSYDRA_S1=0     # if you are using klessydra-s1 (Single hart version of klessydra t1), set this to 1CV
-	USE_KLESSYDRA_OoO=0    # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1CV
-	USE_KLESSYDRA_F0_3TH=0 # if you are using klessydra-f0-3th (The four pipeline version of klessydra f0), set this to 1
-	USE_KLESSYDRA_FT13=0 # if you are using klessydra-fT13 (The temporally fault tolerant version of the T13), then set this to 1
-        USE_KLESSYDRA_dFT13=0 # if you are using klessydra-dfT13 (The dynamic temporally fault tolerant version of the T13), then set this to 1
+	USE_KLESSYDRA=1         # Set this to one if you are using a klessydra core (uses the klessydra startup file)
+	USE_KLESSYDRA_T0_2TH=0  # if you are using klessydra-t0-2th (The three pipeline version of klessydra t0), set this to 1
+	USE_KLESSYDRA_T0_3TH=0  # if you are using klessydra-t0-3th (The four pipeline version of klessydra t0), set this to 1
+	USE_KLESSYDRA_T1_3TH=0  # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1CV
+	USE_KLESSYDRA_M=1       # if you are using klessydra-m (A hart morphing version of klessydra T1), set this to 1CV
+	USE_KLESSYDRA_S1=0      # if you are using klessydra-s1 (Single hart version of klessydra t1), set this to 1CV
+	USE_KLESSYDRA_OoO=0     # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1CV
+	USE_KLESSYDRA_F0_3TH=0  # if you are ubusy_DSPsing klessydra-f0-3th (The four pipeline version of klessydra f0), set this to 1
+	USE_KLESSYDRA_FT13=0    # if you are using klessydra-fT13 (The temporally fault tolerant version of the T13), then set this to 1
+    USE_KLESSYDRA_dFT13=0 	# if you are using klessydra-dfT13 (The dynamic temporally fault tolerant version of the T13), then set this to 1
 	USE_KLESSYDRA_NETLIST=0 # if you are using klessydra-t1-3th (The four pipeline version of klessydra t1), set this to 1
 
 	#  -------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,29 +59,29 @@ then
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	KLESS_CONTEXT_SWITCH=0          # Enables the context switching between cores
 	KLESS_THREAD_POOL_SIZE=3        # Changing the TPS to less than "number of pipeline stages-1" is not allowed. And making it bigger than "pipeline stages-1" is okay but not recommended
-	KLESS_LUTRAM_RF=0 				# Changes the regfile from flip-flop type into LUTRAM type
+	KLESS_LUTRAM_RF=0               # Changes the regfile from flip-flop type into LUTRAM type
 	KLESS_LATCH_RF=0                # Changes the regfile from flip-flop type into Latch type (only works if lutram_rf is set to 0)
 	KLESS_RV32E=0                   # Regfile size, Can be set to 32 for RV32E being 0 else 16 for RV32E being set to 1, also chnges the RISCV compiler and Klessydra startup file accordingly
 	KLESS_RV32M=1                   # Enable the M-extension of the risc-v instruction set
-	KLESS_superscalar_exec_en=1		# Enables superscalar execution when set to 1, else the stall of the pipeline will depend on tha latency of the instruction
+	KLESS_superscalar_exec_en=1     # Enables superscalar execution when set to 1, else the stall of the pipeline will depend on tha latency of the instruction
 	KLESS_morph_en=1                # Enables hardware metamorphosis, that lets the IMT processor morph into an in-order execution processor to avoid stalling
 	KLESS_fetch_stage_en=0          # Enables the an additional fetch stage which handles some of the data dependency logic (needs morph_en to be set or THREAD_POOL_SIZE < THREAD_POOL_BASELINE)
 	KLESS_branch_predict_en=1       # Enables a 1-bit branch predictor (if set without btb_en), that predicts a taken branch if the offset is negative, else it preicts a positive offset
 	KLESS_btb_en=0                  # Enables the branch target buffer of size defined in 2^btb_len, to enable the btb, branch_predict_en must be set to '1'
-	KLESS_btb_len=6                 # Sets the BTB size which is 2^btb_len
+	KLESS_btb_len=5                 # Sets the BTB size which is 2^btb_len
 	KLESS_accl_en=1                 # Enable the generation of the special purpose accelerator
 	KLESS_replicate_accl_en=1       # Set to 1 to replicate the accelerator for every thread
-	KLESS_multithreaded_accl_en=1   # Set to 1 to let the replicated accelerator share the functional units (note: replicate_accl_en must be set to '1')
+	KLESS_multithreaded_accl_en=0   # Set to 1 to let the replicated accelerator share the functional units (note: replicate_accl_en must be set to '1')
 	KLESS_SPM_NUM=4                 # The number of scratchpads available "Minimum allowed is two"
 	KLESS_Addr_Width=14             # This address is for scratchpads. Setting this will make the size of the spm to be: "2^Addr_Width -1"
 	#   KLESS_SPM_STRT_ADDR          std_logic_vector(31 downto 0) := x"1000_0000";  -- This is starting address of the spms, it shouldn't overlap any sections in the memory map
-	KLESS_SIMD=2                    # Changing the SIMD, would change the number of the functional units in the dsp, and the number of banks in the spms (can be power of 2 only e.g. 1,2,4,8)
+	KLESS_SIMD=2                    # Changing the SIMD, would change the number of the functional units in the dsp, and the number of banks in the spms (can be power of 2 only)
 	KLESS_MCYCLE_EN=1               # Can be set to 1 or 0 only. Setting to zero will disable MCYCLE and MCYCLEH
 	KLESS_MINSTRET_EN=1             # Can be set to 1 or 0 only. Setting to zero will disable MINSTRET and MINSTRETH
 	KLESS_MHPMCOUNTER_EN=1          # Can be set to 1 or 0 only. Setting to zero will disable all performance counters except "MCYCLE/H" and "MINSTRET/H"
 	KLESS_count_all=0               # Perfomance counters count for all the harts instead of there own hart
-	KLESS_debug_en=1                # Generates the debug unit
-	KLESS_tracer_en=1				# Generate the instruction tracer used only for debugging purposes
+	KLESS_debug_en=0                # Generates the debug unit
+	KLESS_tracer_en=1               # Generate the instruction tracer used only for debugging purposes
     #  -------------------------------------------------------------------------------------------------------------------------------------------------------
     #  --  ██████╗ ██╗███████╗ ██████╗██╗   ██╗     ██████╗ ██████╗ ██████╗ ███████╗███████╗    ██╗ ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ ███████╗  --
     #  --  ██╔══██╗██║██╔════╝██╔════╝╚██╗ ██╔╝    ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝   ██╔╝██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ ██╔════╝  --
@@ -107,17 +107,22 @@ then
     #	--  ╚══════╝ ╚══╝╚══╝     ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝  --
     #	-----------------------------------------------------------------------------------
 
-	FM_Size=32       				 # Defines the size of the Feature Maps in the convolution tests (can only be multiples of 2, FMs > 32 are not tested)
-	Filter_Size=3   				 # Defines the size of the Filters in the convolution tests (can only be 3,5,7,9,11)
-	VSIZE=1 		 				 # Defines the vector size used in the instruction verification klessydra T13 tests
+	FM_Size=32                       # Defines the size of the Feature Maps in the convolution tests (can only be multiples of 2, FMs > 32 are not tested)
+	Filter_Size=3                    # Defines the size of the Filters in the convolution tests (can only be 3,5,7,9,11)
+	VSIZE=27                         # Defines the vector size used in the instruction verification klessydra T13 tests
 	TIME=$(( RANDOM % 2147483647))   # Defines the time used for random generation in different tests
 
-	COREMARK_ITR=1					 # Defines the number of iterations ran by coremark
+	COREMARK_ITR=1                   # Defines the number of iterations ran by coremark
+
+	# Not a macro, but rather enables or disables the compilation of VGG_libs, uncomment the line to enable the compilation of this library
+	#VGG16_libs=kless_vgg_libs
 
 	file=test
 fi
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+USE_KLESSYDRA_TEST=0
 
 if [ $USE_RI5CY -eq 1 ]
 then
@@ -225,7 +230,7 @@ A_ORDER="-DA_ORDER="$FM_Size       # Defines the size of the Feature Maps in the
 echo '--' A_ORDER=$FM_Size
 B_ORDER="-DB_ORDER="$Filter_Size   # Defines the size of the Filters in the convolution tests (can only be 3,5,7,9,11)
 echo '--' B_ORDER=$Filter_Size
-KLESS_VSIZE="-DNumOfElements="$VSIZE
+KLESS_VSIZE="-DVSIZE="$VSIZE
 echo '--' KLESS_VSIZE=$VSIZE
 KLESS_TIME="-DTIME="$TIME
 echo '--' KLESS_TIME=$TIME
@@ -245,7 +250,8 @@ PL_NETLIST=""
 cmake "$PULP_GIT_DIRECTORY"/sw/ \
 	-DNETLIST_FILE="$file" \
 	-DTPS="$TPS" \
-	-DNUMOFELEMENTS="$KLESS_VSIZE" \
+	-DVGG16_libs="$VGG16_libs" \
+	-DVSIZE="$KLESS_VSIZE" \
 	-DTIME="$KLESS_TIME" \
 	-DA_ORDER="$A_ORDER" \
 	-DB_ORDER="$B_ORDER" \
@@ -271,6 +277,7 @@ cmake "$PULP_GIT_DIRECTORY"/sw/ \
 	-DUSE_KLESSYDRA_FT13="$USE_KLESSYDRA_FT13" \
 	-DUSE_KLESSYDRA_dFT13="$USE_KLESSYDRA_dFT13" \
 	-DUSE_KLESSYDRA_NETLIST="$USE_KLESSYDRA_NETLIST" \
+    -DUSE_RI5CY="$USE_RI5CY" \
     -DUSE_ZERO_RISCY="$USE_ZERO_RISCY" \
     -DZERO_RV32M="$ZERO_RV32M" \
     -DZERO_RV32E="$ZERO_RV32E" \
@@ -303,6 +310,7 @@ cmake "$PULP_GIT_DIRECTORY"/sw/ \
     -DPL_NETLIST="$PL_NETLIST" \
     -DCMAKE_C_FLAGS="$TARGET_C_FLAGS" \
     -DCMAKE_OBJCOPY="$OBJCOPY" \
-    -DCMAKE_OBJDUMP="$OBJDUMP"
+    -DCMAKE_OBJDUMP="$OBJDUMP" \
+
 
 # Add -G "Ninja" to the cmake call above to use ninja instead of make
