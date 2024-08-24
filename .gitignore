@@ -1,6 +1,7 @@
 *.swp
 sw/build*
 imperio
+ips_list.yml
 ips/F03x
 ips/Morph
 ips/OoO
@@ -9,6 +10,9 @@ ips/T02x
 ips/T03x
 ips/T13x
 ips/fT13x
+ips/KPrim
+ips/KFPU
+ips/KVCU
 ips/klessydra_netlists/netlists
 sw/apps/klessydra_tests*
 sw/libs/klessydra_lib*

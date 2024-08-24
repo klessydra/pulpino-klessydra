@@ -80,57 +80,56 @@ fpu:
 
 # Klessydra-F03x
 F03x:
-  commit: rtl_only
+  commit: develop
 
 # Klessydra-Morph
 Morph:
-  commit: master
+  commit: develop
 
 # Klessydra-OoO
 OoO:
-  commit: rtl_only
+  commit: develop
 
 # Klessydra-S1
 S1:
-  commit: rtl_only
+  commit: develop
 
 # Klessydra-T02x
 T02x:
-  commit: rtl_only
+  commit: develop
 
 # Klessydra-T03x
 T03x:
-  commit: rtl_only
+  commit: develop
 
 # Klessydra-T13x
 T13x:
-  commit: rtl_only
+  commit: develop
 
 # Klessydra-fT13x
 fT13x:
-  commit: master
+  commit: develop
 
 # Klessydra Primitve Blocks
 KPrim:
-  commit: main
+  commit: develop
 
 # Klessydra Primitve Blocks
 KFPU:
-  commit: main
+  commit: develop
 
-# Klessydra Software Test Suite
 # Klessydra-dfT13x
 #dfT13x:
-#  commit: master
+#  commit: develop
 
 # Klessydra Software Suite
 Software-Test-Suite:
-  commit: master
+  commit: develop
 
 # Klessydra Libraries
 Libraries:
-  commit: master
+  commit: develop
 
 # Klessydra GUI App
 KView:
-  commit: main
+  commit: develop
