@@ -62,9 +62,6 @@ module core_region
 	parameter KLESS_MHPMCOUNTER_EN         = 1,
 	parameter KLESS_count_all	             = 1,
 	parameter KLESS_debug_en               = 1,
-<<<<<<< HEAD
-  parameter KLESS_tracer_en              = 0
-=======
   parameter KLESS_tracer_en              = 0,
   parameter INSTRRAM_SIZE          =  131072,     
   parameter INSTRRAM_ORG           = 'h000000,
@@ -73,7 +70,6 @@ module core_region
   parameter ROM_SIZE               =  548,
   parameter ROM_ORG                = 'h00020000
 
->>>>>>> 49a60be (Add files via upload)
   )
 (
     // Clock and Reset
