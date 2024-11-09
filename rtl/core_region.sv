@@ -58,15 +58,17 @@ module core_region
 	parameter KLESS_count_all	             = 1,
 	parameter KLESS_debug_en               = 1,
   parameter KLESS_tracer_en              = 0,
-  parameter INSTRRAM_SIZE          =  131072,     
-  parameter INSTRRAM_ORG           = 'h000000,
-  parameter DATARAM_SIZE           =  267386880,
-  parameter DATARAM_ORG            = 'h00100000,
-  parameter ROM_SIZE               =  548,
-  parameter ROM_ORG                = 'h00020000
+
+  parameter INSTRRAM_SIZE                = 131072,
+  parameter INSTRRAM_ORG                 ='h000000,
+  parameter DATARAM_SIZE                 = 267386880,
+  parameter DATARAM_ORG                  ='h00100000,
+  parameter ROM_SIZE                     = 548,
+  parameter ROM_ORG                      ='h00020000
 
   )
 (
+
     // Clock and Reset
     input logic         clk,
     input logic         rst_n,
@@ -92,13 +94,13 @@ module core_region
     output logic        tdo_o
   );
 
-<<<<<<< HEAD
-  localparam INSTR_ADDR_WIDTH = $clog2(INSTR_RAM_SIZE)+1; // to make space for the boot rom
-  localparam DATA_ADDR_WIDTH  = $clog2(DATA_RAM_SIZE);
-=======
+  logic [31:0] data_mem_end;
+  logic [31:0] data_mem_start;
+  assign data_mem_end   = DATARAM_ORG+DATARAM_SIZE-1;
+  assign data_mem_start = DATARAM_ORG;
+
   localparam INSTR_ADDR_WIDTH = $clog2(INSTRRAM_SIZE)+1; // to make space for the boot rom
   localparam DATA_ADDR_WIDTH  = $clog2(DATARAM_SIZE);
->>>>>>> 49a60be (Add files via upload)
 
   localparam AXI_B_WIDTH      = $clog2(AXI_DATA_WIDTH/8); // AXI "Byte" width
 
@@ -562,6 +564,7 @@ module core_region
   end else if (USE_KLESSYDRA_M) begin: CORE
       klessydra_top
       #(
+        .INSTRRAM_ORG            (INSTRRAM_ORG),
         .THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
         .lutram_rf               (KLESS_LUTRAM_RF),
         .latch_rf                (KLESS_LATCH_RF),
@@ -1008,7 +1011,7 @@ module core_region
   //----------------------------------------------------------------------------//
   // DEMUX
   //----------------------------------------------------------------------------//
-  assign is_axi_addr     = ((core_lsu_addr[31:20] != 12'h0ef) & (core_lsu_addr[31:24] != 8'h0f) & (core_lsu_addr[31:20] != 12'h001));
+  assign is_axi_addr     = ((core_lsu_addr[31:20] > data_mem_end[31:20]) || (core_lsu_addr[31:20] < data_mem_start[31:20]));
   //assign is_axi_addr     = ((core_lsu_addr[31:20] != 12'h0ef) & (core_lsu_addr[31:20] != 12'h001));
   assign core_data_req   = (~is_axi_addr) & core_lsu_req;
   assign core_axi_req    =   is_axi_addr  & core_lsu_req;
@@ -1062,11 +1065,7 @@ module core_region
   instr_ram_wrap
   #(
     .USE_KLESSYDRA_NETLIST ( USE_KLESSYDRA_NETLIST ), 
-<<<<<<< HEAD
-    .RAM_SIZE   ( INSTR_RAM_SIZE ),
-=======
     .RAM_SIZE   ( INSTRRAM_SIZE ),
->>>>>>> 49a60be (Add files via upload)
     .DATA_WIDTH ( AXI_DATA_WIDTH )
   )
   instr_mem
@@ -1188,11 +1187,7 @@ end
 else begin : mem_gen
   sp_ram_wrap
   #(
-<<<<<<< HEAD
-    .RAM_SIZE   ( DATA_RAM_SIZE  ),
-=======
     .RAM_SIZE   ( DATARAM_SIZE  ),
->>>>>>> 49a60be (Add files via upload)
     .DATA_WIDTH ( AXI_DATA_WIDTH )
   )
   data_mem
