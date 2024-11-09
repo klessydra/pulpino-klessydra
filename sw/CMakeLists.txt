@@ -129,6 +129,12 @@ set(CMAKE_ASM_FLAGS    "${CMAKE_C_FLAGS}")
 set(PULP_MODELSIM_DIRECTORY "" CACHE PATH "Path to the ModelSim PULPino build")
 set(VSIM "vsim" CACHE FILEPATH "Path to the vsim executable")
 
+# Configure linker scripts dynamically
+configure_file(${CMAKE_SOURCE_DIR}/ref/link.boot.ld.in
+               ${CMAKE_SOURCE_DIR}/ref/link.boot.ld @ONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/ref/link.common.ld.in
+               ${CMAKE_SOURCE_DIR}/ref/link.common.ld @ONLY)
 ################################################################################
 
  if(${ZERO_RV32E})
