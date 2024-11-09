@@ -127,65 +127,28 @@ then
     #   -- ██║░╚═╝░██║███████╗██║░╚═╝░██║	██████╔╝███████╗██║░░░░░██║██║░╚███║███████╗██████╔╝ --
     #   -- ╚═╝░░░░░╚═╝╚══════╝╚═╝░░░░░╚═╝	╚═════╝░╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚══╝╚══════╝╚═════╝░ --
     #	-------------------------------------------------------------------------------------------
-    INSTRRAM_SIZE=131072 #290816
+
+    # Define the memory regions and sizes in "HEX"
     INSTRRAM_ORG=0x80000000
-    GLOBALRAM_SIZE=267386880 #290816
-    #GLOBALRAM_SIZE=0xFF00000 #290816 
+    INSTRRAM_SIZE=0x20000 # 128KB
     GLOBALRAM_ORG=0x80100000
-    ROM_SIZE=8192
-    ROM_ORG=0x00050000 #0x10000004 #0x00050000
-    HART_STACK_SIZE=262144
-    STACK_SIZE=$((HART_STACK_SIZE * KLESS_THREAD_POOL_SIZE))
-    STACK_ORG=$((GLOBALRAM_ORG + GLOBALRAM_SIZE - STACK_SIZE))
+    GLOBALRAM_SIZE=0xFF00000 # 255MB
+    ROM_ORG=0x00050000
+    ROM_SIZE=0x2000 # 8KB
+    HART_STACK_SIZE=0x40000 # 256KB
     PERIPHERALS=0x10000000
+    # STACK is part of the GLOBALRAM
+    STACK_SIZE=$((HART_STACK_SIZE * KLESS_THREAD_POOL_SIZE))
+    STACK_SIZE=$(printf "0x%X" $STACK_SIZE)
+    STACK_ORG=$((GLOBALRAM_ORG + GLOBALRAM_SIZE - STACK_SIZE))
+    STACK_ORG=$(printf "0x%X" $STACK_ORG)
     STACK_END=$((GLOBALRAM_ORG + GLOBALRAM_SIZE))
     STACK_END=$(echo "obase=16;${STACK_END}" |bc)
     STACK_END=$(echo "0x$STACK_END")
 fi
 
-		
-	# Link Common memory modification
-	LINK_COMMON=../ref/link.common.ld
-	LINK_BOOT=../ref/link.boot.ld
-	SPI_DEBUG=../../tb/spi_debug_test.svh
-	#PROGRAM_COUNTER=../../ips/Morph/klessydra-m/RTL-Program_Counter_unit.vhd
-	KLESSYDRA_DEFS=../libs/klessydra_lib/general_libs/inc/klessydra_defs.h
-
-	# Temporary Patch of RTL_PROGRAM_COUNTER.vhd (TODO: pass the value)
-	#PC_NEW_VALUE=$((INSTRRAM_ORG + 0x80))
-	#starting_string=$(cat $PROGRAM_COUNTER | grep "pc(h) <=" | head -2 | tail -1)
-	#modified_string=$(echo "$starting_string" | sed "s/\(to_unsigned(\)[0-9]\+/\1$PC_NEW_VALUE/g")
-	#sed -i "/$starting_string/c $modified_string" $PROGRAM_COUNTER
-
-	# Starting addresses, in hex
-	actual_instrram_origin_h=$(cat $LINK_COMMON | grep -n "instrram" | head -1 | cut -d ":" -f 3 | awk '{print $3}' | sed 's/.$//' |tr -d "[:blank:]"|awk '{print substr($0,3)}')  	# INSTRRAM starting address in hex
-	actual_rom_origin_h=$(cat $LINK_BOOT| grep -n "rom" | head -1 | cut -d ":" -f 3 | awk '{print $3}' |tr -d "[:blank:]"|awk '{print substr($0,3)}'| sed 's/.$//' )				# ROM starting address in hex
-	actual_globalram_origin_h=$(cat $LINK_COMMON | grep -n "dataram" | head -1 | cut -d ":" -f 3 | awk '{print $3}' |tr -d "[:blank:]"|awk '{print substr($0,3)}'|sed 's/.$//')     	# DATA_RAM starting address in hex
-	actual_stack_origin_h=$(cat $LINK_COMMON | grep -n "stack" | head -1 | cut -d ":" -f 3 | awk '{print $3}' |tr -d "[:blank:]"|awk '{print substr($0,3)}'|sed 's/.$//')           # STACK starting address in hex
-	starting_event_h=$(cat $SPI_DEBUG| grep -n "EVENT_UNIT_BASE_ADDR" | head -1 | cut -d " " -f 3 )
-
-	# Sizes in hex
-	actual_instrram_size_h=$(cat $LINK_COMMON| grep -n "instrram" | head -1 | cut -d ":" -f 3|cut -d "=" -f 3 |tr -d "[:blank:]"|awk '{print substr($0,3)}') 	    # INSTRRAM SIZE in hex
-	actual_rom_size_h=$(cat $LINK_BOOT | grep -n "rom" | head -1 | cut -d ":" -f 3 | awk '{print $6}'|tr -d "[:blank:]"|awk '{print substr($0,3)}')					# ROM SIZE in hex
-	actual_globalram_size_h=$(cat $LINK_COMMON | grep -n "dataram" | head -1 | cut -d ":" -f 3 | awk '{print $6}' |tr -d "[:blank:]"|awk '{print substr($0,3)}') 	# DATA_RAM SIZE in hex
-	actual_stack_size_h=$(cat $LINK_COMMON | grep -n "stack" | head -1 | cut -d ":" -f 3 | awk '{print $6}' |tr -d "[:blank:]"|awk '{print substr($0,3)}')          # STACK SIZE in hex
-	#actual_stack_end_h=$(cat $KLESSYDRA_DEF | grep -n "STACK_START"|tail -1|cut -d "x" -f 2)          # STACK END in hex
-
-	event_value="${PERIPHERALS_ORG#0x}"
-	GLOBALRAM_SIZE_H=$(echo "obase=16;${GLOBALRAM_SIZE}" |bc)
-	INSTRRAM_SIZE_H=$(echo "obase=16;${INSTRRAM_SIZE}" |bc)
-	STACK_SIZE_H=$(echo "obase=16;${STACK_SIZE}" |bc)
-	ROM_SIZE_H=$(echo "obase=16;${ROM_SIZE}" |bc)
-	STACK_ORG_H=$(echo "obase=16;${STACK_ORG}" |bc)
-	new_event_h=$(echo "32'h$event_value")
-
-	sed -i -e "s/\(dataram\s*:\s*ORIGIN\s*=\s*\)0x$actual_globalram_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_globalram_size_h*/\1$GLOBALRAM_ORG\20x$GLOBALRAM_SIZE_H/g" $LINK_COMMON
-	sed -i -e "s/\(instrram\s*:\s*ORIGIN\s*=\s*\)0x$actual_instrram_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_instrram_size_h*/\1$INSTRRAM_ORG\20x$INSTRRAM_SIZE_H/g" $LINK_COMMON
-	sed -i -e "s/\(stack\s*:\s*ORIGIN\s*=\s*\)0x$actual_stack_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_stack_size_h*/\10x$STACK_ORG_H\20x$STACK_SIZE_H/g" $LINK_COMMON
-
-	sed -i -e "s/\(rom\s*:\s*ORIGIN\s*=\s*\)0x$actual_rom_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_rom_size_h*/\1$ROM_ORG\2 0x$ROM_SIZE_H/g" $LINK_BOOT
-    sed -i -e "s/\(stack\s*:\s*ORIGIN\s*=\s*\)0x$actual_stack_origin_h*\(,\s*LENGTH\s*=\s*\)0x$actual_stack_size_h*/\10x$STACK_ORG_H\20x$STACK_SIZE_H/g" $LINK_BOOT   
-    sed -i -e "s/^#define STACK_END .*/#define STACK_END $STACK_END/"  $KLESSYDRA_DEFS
+	#KLESSYDRA_DEFS=../libs/klessydra_lib/general_libs/inc/klessydra_defs.h
+    #sed -i -e "s/^#define STACK_END .*/#define STACK_END $STACK_END/"  $KLESSYDRA_DEFS
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if [ $USE_RI5CY -eq 1 ]
