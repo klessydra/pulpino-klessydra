@@ -72,7 +72,7 @@ module tb;
   parameter GLOBALRAM_SIZE         =  267386880;
   parameter GLOBALRAM_ORG          = 'h00100000;
   parameter DATARAM_SIZE           =  GLOBALRAM_SIZE;
-  parameter DATARAM_ORG            = 'h00100000;
+  parameter DATARAM_ORG            =  GLOBALRAM_ORG;
   parameter ROM_SIZE               =  8192;
   parameter ROM_ORG                = 'h00020000; 
   parameter PERIPHERALS            = 'h1000000;
