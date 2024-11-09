@@ -145,10 +145,9 @@ then
     STACK_END=$((GLOBALRAM_ORG + GLOBALRAM_SIZE))
     STACK_END=$(echo "obase=16;${STACK_END}" |bc)
     STACK_END=$(echo "0x$STACK_END")
+
 fi
 
-	#KLESSYDRA_DEFS=../libs/klessydra_lib/general_libs/inc/klessydra_defs.h
-    #sed -i -e "s/^#define STACK_END .*/#define STACK_END $STACK_END/"  $KLESSYDRA_DEFS
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if [ $USE_RI5CY -eq 1 ]

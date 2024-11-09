@@ -121,8 +121,8 @@ set(COREMARK_DEFS "${ITERATIONS}")
 set(KLESS_DEFINES "${TPS}" "${VSIZE}" "${TIME}" "${A_ORDER}" "${B_ORDER}" "${KLESS_SPM_A}" "${KLESS_SPM_B}" "${KLESS_SPM_C}" "${KLESS_SPM_D}"
                   "-DROM_SIZE=${ROM_SIZE}" "-DROM_ORG=${ROM_ORG}" 
                   "-DGLOBALRAM_SIZE=${GLOBALRAM_SIZE}" "-DGLOBALRAM_ORG=${GLOBALRAM_ORG}"
-                  "-DINSTRRAM_SIZE=${INSTRRAM_SIZE}" "-DINSTRRAM_ORG=${INSTRRAM_ORG}" "-DHART_STACK_SIZE=${HART_STACK_SIZE}" "-DPULPINO_BASE_ADDR=${PERIPHERALS}")
-
+                  "-DINSTRRAM_SIZE=${INSTRRAM_SIZE}" "-DINSTRRAM_ORG=${INSTRRAM_ORG}" 
+                  "-DHART_STACK_SIZE=${HART_STACK_SIZE}" "-DSTACK_END=${STACK_END}" "-DPULPINO_BASE_ADDR=${PERIPHERALS}")
 set(CMAKE_ASM_COMPILER "${CMAKE_C_COMPILER}")
 set(CMAKE_ASM_FLAGS    "${CMAKE_C_FLAGS}")
 
@@ -171,8 +171,10 @@ configure_file(${CMAKE_SOURCE_DIR}/ref/link.common.ld.in
 
  set_source_files_properties(${crt0} PROPERTIES LANGUAGE C)
  add_library(crt0 OBJECT ${crt0})
+ target_compile_definitions(crt0 PRIVATE ${KLESS_DEFINES})
 
  add_library(crt0_boot OBJECT ${crt0_boot})
+ target_compile_definitions(crt0 PRIVATE ${KLESS_DEFINES})
  set_target_properties(crt0_boot PROPERTIES COMPILE_FLAGS "-DBOOT")
 
 
