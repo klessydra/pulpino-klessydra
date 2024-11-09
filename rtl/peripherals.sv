@@ -211,12 +211,8 @@ module peripherals
   periph_bus_wrap
   #(
      .APB_ADDR_WIDTH( APB_ADDR_WIDTH ),
-<<<<<<< HEAD
-     .APB_DATA_WIDTH( 32             )
-=======
      .APB_DATA_WIDTH( 32             ),
      .PERIPHERALS   ( PERIPHERALS    )
->>>>>>> 49a60be (Add files via upload)
   )
   periph_bus_i
   (

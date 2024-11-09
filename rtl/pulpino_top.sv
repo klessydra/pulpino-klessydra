@@ -137,11 +137,7 @@ module pulpino_top
     output logic [31:0] [5:0] pad_cfg_o,
     output logic       [31:0] pad_mux_o
   );
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 49a60be (Add files via upload)
   logic        clk_int;
 
   logic        fetch_enable_int;
@@ -233,15 +229,10 @@ module pulpino_top
     .ZERO_RV32M           (  ZERO_RV32M          ),
     .ZERO_RV32E           (  ZERO_RV32E          ),
 	//Klessydra Parameters
-<<<<<<< HEAD
 	.KLESS_CONTEXT_SWITCH          (KLESS_CONTEXT_SWITCH),
    	.KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
     .KLESS_LUTRAM_RF               (KLESS_LUTRAM_RF),
     .KLESS_LATCH_RF                (KLESS_LATCH_RF),
-=======
-   	.KLESS_THREAD_POOL_SIZE        (KLESS_THREAD_POOL_SIZE),
-    .KLESS_LUTRAM_RF               (KLESS_LUTRAM_RF),
->>>>>>> 49a60be (Add files via upload)
    	.KLESS_RV32E                   (KLESS_RV32E),
    	.KLESS_RV32M                   (KLESS_RV32M),
     .KLESS_superscalar_exec_en     (KLESS_superscalar_exec_en),
@@ -260,9 +251,6 @@ module pulpino_top
    	.KLESS_MINSTRET_EN             (KLESS_MINSTRET_EN),
    	.KLESS_MHPMCOUNTER_EN          (KLESS_MHPMCOUNTER_EN),
    	.KLESS_count_all               (KLESS_count_all),
-<<<<<<< HEAD
-   	.KLESS_debug_en                (KLESS_debug_en)
-=======
    	.KLESS_debug_en                (KLESS_debug_en),
     .INSTRRAM_SIZE                 (INSTRRAM_SIZE),
     .INSTRRAM_ORG                  (INSTRRAM_ORG ),
@@ -270,7 +258,6 @@ module pulpino_top
     .DATARAM_ORG                   (DATARAM_ORG  ),
     .ROM_SIZE                      (ROM_SIZE     ),
     .ROM_ORG                       (ROM_ORG      )
->>>>>>> 49a60be (Add files via upload)
   )
   core_region_i
   (
@@ -306,12 +293,8 @@ module pulpino_top
     .AXI_DATA_WIDTH      ( `AXI_DATA_WIDTH      ),
     .AXI_SLAVE_ID_WIDTH  ( `AXI_ID_SLAVE_WIDTH  ),
     .AXI_MASTER_ID_WIDTH ( `AXI_ID_MASTER_WIDTH ),
-<<<<<<< HEAD
-    .AXI_USER_WIDTH      ( `AXI_USER_WIDTH      )
-=======
     .AXI_USER_WIDTH      ( `AXI_USER_WIDTH      ),
     .PERIPHERALS         ( PERIPHERALS         )
->>>>>>> 49a60be (Add files via upload)
   )
   peripherals_i
   (

@@ -34,10 +34,6 @@ module periph_bus_wrap
 
     );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 49a60be (Add files via upload)
   localparam NB_MASTER      = `NB_MASTER;
 
   logic [NB_MASTER-1:0][APB_ADDR_WIDTH-1:0] s_start_addr;
