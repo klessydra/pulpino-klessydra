@@ -17,3 +17,5 @@ sw/apps/klessydra_tests*
 sw/libs/klessydra_lib*
 KView
 sw/build/cmake_configure.klessydra-m.gcc.sh
+sw/ref/link.common.ld
+sw/ref/link.boot.ld
