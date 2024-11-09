@@ -114,13 +114,14 @@ print("argument 5:", sys.argv[5]);
 print("argument 6:", sys.argv[6]);
 
 l2_banks     = 1
-l2_bank_size = int(sys.argv[2])/4; # in words (32 bit)
+l2_bank_size = int(sys.argv[2], 16) // 4; # in words (32 bit)
 l2_start     = int(sys.argv[3],16);
 
 l2_end       = l2_start + l2_banks * l2_bank_size * 4 - 1
 
 tcdm_banks     = 1
-tcdm_bank_size = (int(sys.argv[4])+int(sys.argv[6],16))/4
+tcdm_bank_size = (int(sys.argv[4], 16) + int(sys.argv[6], 16)) // 4
+#tcdm_bank_size = (int(sys.argv[4])+int(sys.argv[6],16))/4
 tcdm_start     = int(sys.argv[5],16)
 tcdm_end       = tcdm_start + tcdm_banks * tcdm_bank_size * 4 - 1
 tcdm_bank_bits = int(math.log(tcdm_banks, 2))
