@@ -26,20 +26,20 @@ MESSAGE(STATUS "${LightMagenta}ZERO_RV32M${ColourReset} = ${ZERO_RV32M}")
 MESSAGE(STATUS "${LightMagenta}ZERO_RV32E${ColourReset} = ${ZERO_RV32E}")
 MESSAGE(STATUS "${LightMagenta}PL_NETLIST${ColourReset} = ${PL_NETLIST}")
 MESSAGE("")
-MESSAGE("*************************")
+MESSAGE("********************")
 MESSAGE("** MEMORY CONFIGS **")
-MESSAGE("*************************")
-MESSAGE(STATUS "${LightCyan}INSTRRAM_SIZE${ColourReset}= ${INSTRRAM_SIZE}")
-MESSAGE(STATUS "${LightCyan}INSTRRAM_ORG${ColourReset}= ${INSTRRAM_ORG}")
-MESSAGE(STATUS "${LightCyan}GLOBALRAM_SIZE${ColourReset}= ${GLOBALRAM_SIZE}")
-MESSAGE(STATUS "${LightCyan}GLOBALRAM_ORG${ColourReset}= ${GLOBALRAM_ORG}")
-MESSAGE(STATUS "${LightCyan}ROM_SIZE${ColourReset}= ${ROM_SIZE}")
-MESSAGE(STATUS "${LightCyan}ROM_ORG${ColourReset}= ${ROM_ORG}")
-MESSAGE(STATUS "${LightCyan}HART_STACK_SIZE${ColourReset}= ${HART_STACK_SIZE}")
-MESSAGE(STATUS "${LightCyan}STACK_SIZE${ColourReset}= ${STACK_SIZE}")
-MESSAGE(STATUS "${LightCyan}STACK_ORG${ColourReset}= ${STACK_ORG}")
-MESSAGE(STATUS "${LightCyan}STACK_END${ColourReset}= ${STACK_END}")
-MESSAGE(STATUS "${LightCyan}PERIPHERALS${ColourReset}= ${PERIPHERALS}")
+MESSAGE("********************")
+MESSAGE(STATUS "${LightCyan}INSTRRAM_SIZE${ColourReset} = ${INSTRRAM_SIZE}")
+MESSAGE(STATUS "${LightCyan}INSTRRAM_ORG${ColourReset} = ${INSTRRAM_ORG}")
+MESSAGE(STATUS "${LightCyan}GLOBALRAM_SIZE${ColourReset} = ${GLOBALRAM_SIZE}")
+MESSAGE(STATUS "${LightCyan}GLOBALRAM_ORG${ColourReset} = ${GLOBALRAM_ORG}")
+MESSAGE(STATUS "${LightCyan}ROM_SIZE${ColourReset} = ${ROM_SIZE}")
+MESSAGE(STATUS "${LightCyan}ROM_ORG${ColourReset} = ${ROM_ORG}")
+MESSAGE(STATUS "${LightCyan}HART_STACK_SIZE${ColourReset} = ${HART_STACK_SIZE}")
+MESSAGE(STATUS "${LightCyan}STACK_SIZE${ColourReset} = ${STACK_SIZE}")
+MESSAGE(STATUS "${LightCyan}STACK_ORG${ColourReset} = ${STACK_ORG}")
+MESSAGE(STATUS "${LightCyan}STACK_END${ColourReset} = ${STACK_END}")
+MESSAGE(STATUS "${LightCyan}PERIPHERALS${ColourReset} = ${PERIPHERALS}")
 MESSAGE("")
 MESSAGE("*****************************")
 MESSAGE("** KLESSYDRA CORES CONFIGS **")
@@ -91,12 +91,18 @@ MESSAGE("")
 # Format for RTL (replace '0x' with '16#' and append '#')
 string(REPLACE "0x" "16#" RTL_INSTRRAM_ORG ${INSTRRAM_ORG})
 set(RTL_INSTRRAM_ORG "${RTL_INSTRRAM_ORG}#")
+string(REPLACE "0x" "16#" RTL_INSTRRAM_SIZE ${INSTRRAM_SIZE})
+set(RTL_INSTRRAM_SIZE "${RTL_INSTRRAM_SIZE}#")
 
 string(REPLACE "0x" "16#" RTL_GLOBALRAM_ORG ${GLOBALRAM_ORG})
 set(RTL_GLOBALRAM_ORG "${RTL_GLOBALRAM_ORG}#")
-
 string(REPLACE "0x" "16#" RTL_GLOBALRAM_SIZE ${GLOBALRAM_SIZE})
 set(RTL_GLOBALRAM_SIZE "${RTL_GLOBALRAM_SIZE}#")
+
+string(REPLACE "0x" "16#" RTL_ROM_ORG ${ROM_ORG})
+set(RTL_ROM_ORG "${RTL_ROM_ORG}#")
+string(REPLACE "0x" "16#" RTL_ROM_SIZE ${ROM_SIZE})
+set(RTL_ROM_SIZE "${RTL_ROM_SIZE}#")
 
 macro(add_sim_targets NAME)
   set(SETENV "env VSIM_DIR=${PULP_MODELSIM_DIRECTORY} \
@@ -139,12 +145,12 @@ macro(add_sim_targets NAME)
   KLESS_count_all=${KLESS_count_all} \
   KLESS_debug_en=${KLESS_debug_en} \
   KLESS_tracer_en=${KLESS_tracer_en} \
-  INSTRRAM_SIZE=${INSTRRAM_SIZE} \
+  INSTRRAM_SIZE=${RTL_INSTRRAM_SIZE} \
   INSTRRAM_ORG=${RTL_INSTRRAM_ORG} \
-  GLOBALRAM_SIZE=${GLOBALRAM_SIZE} \
+  GLOBALRAM_SIZE=${RTL_GLOBALRAM_SIZE} \
   GLOBALRAM_ORG=${RTL_GLOBALRAM_ORG} \
-  ROM_SIZE=${ROM_SIZE} \
-  ROM_ORG=${ROM_ORG} \
+  ROM_SIZE=${RTL_ROM_SIZE} \
+  ROM_ORG=${RTL_ROM_ORG} \
   STACK_SIZE=${STACK_SIZE} \
   STACK_ORG=${STACK_ORG} \
   STACK_END=${STACK_END} \
