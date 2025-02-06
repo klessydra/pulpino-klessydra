@@ -27,6 +27,7 @@ module pulpino_top
     parameter USE_KLESSYDRA_OOO     = 0,
     parameter USE_KLESSYDRA_F0_3TH  = 0,
     parameter USE_KLESSYDRA_FT13    = 0,
+    parameter USE_KLESSYDRA_dFT13   = 0,
     parameter USE_KLESSYDRA_NETLIST = 0,
     parameter USE_ZERO_RISCY        = 0,
     parameter RISCY_RV32F           = 0,
