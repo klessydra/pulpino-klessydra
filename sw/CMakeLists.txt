@@ -241,7 +241,7 @@ add_custom_target(vcompile.core.netlist
 
 add_subdirectory(libs/klessydra_lib/general_libs)
 
-if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13})
+if (${USE_KLESSYDRA_M} OR ${USE_KLESSYDRA_T1_3TH} OR ${USE_KLESSYDRA_NETLIST} OR ${USE_KLESSYDRA_OoO} OR ${USE_KLESSYDRA_S1} OR ${USE_KLESSYDRA_FT13} OR ${USE_KLESSYDRA_dFT13})
   add_subdirectory(libs/klessydra_lib/dsp_libs)
   add_subdirectory(libs/klessydra_lib/vgg16_libs)
   add_subdirectory(libs/klessydra_lib/cb_libs)
