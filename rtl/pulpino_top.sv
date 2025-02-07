@@ -19,6 +19,7 @@
 
 module pulpino_top
   #(
+    parameter USE_KLESSYDRA         = 0,
     parameter USE_KLESSYDRA_T0_2TH  = 0,
     parameter USE_KLESSYDRA_T0_3TH  = 0,
     parameter USE_KLESSYDRA_T1_3TH  = 0,
@@ -207,6 +208,7 @@ module pulpino_top
     .AXI_ID_MASTER_WIDTH  ( `AXI_ID_MASTER_WIDTH ),
     .AXI_ID_SLAVE_WIDTH   ( `AXI_ID_SLAVE_WIDTH  ),
     .AXI_USER_WIDTH       ( `AXI_USER_WIDTH      ),
+    .USE_KLESSYDRA        ( USE_KLESSYDRA        ),
     .USE_KLESSYDRA_T0_2TH (  USE_KLESSYDRA_T0_2TH),
     .USE_KLESSYDRA_T0_3TH (  USE_KLESSYDRA_T0_3TH),
     .USE_KLESSYDRA_T1_3TH (  USE_KLESSYDRA_T1_3TH),
