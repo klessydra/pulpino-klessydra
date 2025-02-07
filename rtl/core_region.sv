@@ -26,6 +26,7 @@ module core_region
     
     
     parameter INSTR_RAM_SIZE        = 131072, // in bytes
+    parameter USE_KLESSYDRA         = 0,
     parameter USE_KLESSYDRA_T0_2TH  = 0,
     parameter USE_KLESSYDRA_T0_3TH  = 0,
     parameter USE_KLESSYDRA_T1_3TH  = 0,
