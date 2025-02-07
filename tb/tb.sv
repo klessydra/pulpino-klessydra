@@ -28,7 +28,8 @@ module tb;
   parameter  BAUDRATE       = (781250*4);    // 1562500
   parameter  CLK_USE_FLL    = 0;  // 0 or 1
   parameter  TEST           = ""; //valid values are "" (NONE), "DEBUG"
-  parameter  USE_ZERO_RISCY = 0;
+  parameter  USE_ZERO_RISCY        = 0;
+  parameter  USE_KLESSYDRA         = 0;
   parameter  USE_KLESSYDRA_T0_2TH  = 0;
   parameter  USE_KLESSYDRA_T0_3TH  = 0;
   parameter  USE_KLESSYDRA_T1_3TH  = 0;
@@ -158,6 +159,7 @@ module tb;
   pulpino_top
   #(
     .USE_ZERO_RISCY          ( USE_ZERO_RISCY       ),
+    .USE_KLESSYDRA           ( USE_KLESSYDRA        ),
     .USE_KLESSYDRA_T0_2TH    ( USE_KLESSYDRA_T0_2TH ),
     .USE_KLESSYDRA_T0_3TH    ( USE_KLESSYDRA_T0_3TH ),
     .USE_KLESSYDRA_T1_3TH    ( USE_KLESSYDRA_T1_3TH ),
