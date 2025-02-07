@@ -289,7 +289,7 @@ module tb;
 
     $display("Using MEMLOAD method: %s", memload);
 
-    $display("Using %s core", USE_ZERO_RISCY ? "zero-riscy" : "ri5cy");
+    $display("Using %s core", (USE_ZERO_RISCY) ? "zero-riscy" : (USE_KLESSYDRA) ? "Klessydra" : "ri5cy");
 
     use_qspi = SPI == "QUAD" ? 1'b1 : 1'b0;
 
