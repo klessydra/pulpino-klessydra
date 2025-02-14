@@ -37,6 +37,7 @@ module tb;
   parameter  USE_KLESSYDRA_OOO     = 0;
   parameter  USE_KLESSYDRA_F0_3TH  = 0;
   parameter  USE_KLESSYDRA_FT13    = 0;
+  parameter  USE_KLESSYDRA_dFT13   = 0;
   parameter  USE_KLESSYDRA_NETLIST = 0;
   parameter  RISCY_RV32F    = 0;
   parameter  ZERO_RV32M     = 1;
@@ -175,6 +176,7 @@ module tb;
     .USE_KLESSYDRA_OOO       ( USE_KLESSYDRA_OOO    ),
     .USE_KLESSYDRA_F0_3TH    ( USE_KLESSYDRA_F0_3TH ),
     .USE_KLESSYDRA_FT13      ( USE_KLESSYDRA_FT13   ),
+	  .USE_KLESSYDRA_dFT13     ( USE_KLESSYDRA_dFT13   ),
     .USE_KLESSYDRA_NETLIST   ( USE_KLESSYDRA_NETLIST ),
     .RISCY_RV32F             ( RISCY_RV32F    ),
     .ZERO_RV32M              ( ZERO_RV32M     ),
