@@ -110,6 +110,10 @@ T13x:
 fT13x:
   commit: develop
 
+# Klessydra-dfT13x
+dfT13x:
+  commit: develop
+  
 # Klessydra Primitve Blocks
 KPrim:
   commit: develop
@@ -117,10 +121,6 @@ KPrim:
 # Klessydra Primitve Blocks
 KFPU:
   commit: develop
-
-# Klessydra-dfT13x
-#dfT13x:
-#  commit: develop
 
 # Klessydra Software Suite
 Software-Test-Suite:
