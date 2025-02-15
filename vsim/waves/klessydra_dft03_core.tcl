@@ -98,7 +98,6 @@ add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Prg_Ctr/restore_fault 
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/LSU/LS_is_running 
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/LSU/LS_is_running_wire
-add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/LSU/pippo_wire 
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/RF/restore_store_active 
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/restore_fault_LSU 
 add wave -group Debug -radix hexadecimal tb/top_i/core_region_i/CORE/RISCV_CORE/MORPH_inst/Pipe/restore_fault_LSU_wire 
